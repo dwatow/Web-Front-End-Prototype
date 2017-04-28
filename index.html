@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>滾動視差的練習</title>
+    <style media="screen">
+      body {
+        overflow-y: hidden;
+        margin: 0;
+      }
+
+      .parallax__layer--base .aims {
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        width: 500px;
+        border: 1px black solid;
+      }
+
+      .parallax__layer--base .aims div {
+        flex: 1 0 48px;
+        height: 48px;
+        border: 1px black solid;
+      }
+
+      .parallax__layer--back .aims {
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        width: 500px;
+        border: 1px blue solid;
+      }
+
+      .parallax__layer--back .aims div {
+        flex: 1 0 48px;
+        height: 48px;
+        border: 1px blue solid;
+      }
+
+      .parallax {
+        perspective: 1px;
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      .parallax__layer--base {
+        transform: translateZ(0);
+      }
+
+      .parallax__layer--back {
+        transform: translateZ(-1px) scale(2);
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="parallax">
+      <div class="parallax__layer--base">
+        <div class="aims"></div>
+      </div>
+      <div class="parallax__layer--back">
+        <div class="aims"></div>
+      </div>
+      <div class="parallax__layer--base">
+        <div class="aims"></div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      const aims = document.querySelectorAll('.aims');
+
+      aims.forEach(aim => {
+        const totalAims = 120;
+        for (var i = 0; i < totalAims; i++) {
+          const box = document.createElement('div');
+          aim.appendChild(box);
+        }
+      });
+
+    </script>
+  </body>
+</html>
