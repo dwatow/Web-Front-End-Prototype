@@ -2,9 +2,220 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>滑動頁面練習(Animate版)</title>
+    <title>滑動頁面練習(animate.css版)</title>
+    <link rel="stylesheet" href="animate.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style media="screen">
+      body {
+        overflow-x: hidden;
+        overflow-y: hidden;
+        margin: 0;
+      }
+      /*aims*/
+
+      .slider1 .aims,
+      .slider1 .aims div {
+        border: 1px solid blue;
+      }
+
+      .slider2 .aims,
+      .slider2 .aims div {
+        border: 1px solid red;
+      }
+
+      .slider3 .aims,
+      .slider3 .aims div {
+        border: 1px solid green;
+      }
+
+      .aims {
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        width: 200px;
+        /*border: 1px blue solid;*/
+      }
+
+      .aims div {
+        flex: 1 0 48px;
+        height: 48px;
+        /*border: 1px blue solid;*/
+      }
+      /*radios*/
+
+      .radios {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background-color: gray;
+        padding-right: 5px;
+      }
+      /*ham*/
+
+      .ham {
+        position: fixed;
+        top: 30px;
+        left: 30px;
+      }
+
+      .aims+div {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+      }
+      /*slider*/
+
+      .slider {
+        /*border: 1px red dashed;*/
+        position: relative;
+        display: none;
+        width: 100vw;
+        height: 100vh;
+        overflow-y: scroll;
+      }
+
+      .watch {
+        display: block;
+      }
+      /*change watch*/
+
+    </style>
   </head>
   <body>
+    <div class="slide_page">
 
+      <div class="slider slider1 watch">
+        <div class="aims"></div>
+
+      </div>
+      <div class="slider slider2">
+        <div class="aims"></div>
+        <div>
+          <i class="fa fa-arrow-circle-left"></i>
+        </div>
+
+      </div>
+      <div class="slider slider3">
+        <div class="aims"></div>
+        <div>
+          <i class="fa fa-arrow-circle-left"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="ham">
+      <i class="fa fa-align-justify"></i>
+    </div>
+
+    <div class="radios">
+      <h2>menu</h2>
+      <!-- <div>
+        <input id="slider1" name="curr_watch" type="radio" checked/><label for="slider1">Slider1</label>
+      </div> -->
+      <div>
+        <input id="slider2" name="curr_watch" type="radio" /><label for="slider2">Slider2</label>
+      </div>
+      <div>
+        <input id="slider3" name="curr_watch" type="radio" /><label for="slider3">Slider3</label>
+      </div>
+    </div>
+    <script type="text/javascript">
+      const aims = document.querySelectorAll('.aims');
+      aims.forEach(aim => {
+        const totalAims = 120;
+        for (var i = 0; i < totalAims; i++) {
+          const box = document.createElement('div');
+          aim.appendChild(box);
+        }
+      });
+
+      function gotoPage() {
+        const sliderPage = document.querySelector(`.${this.id}`);
+        console.log(sliderPage);
+
+        const sliders = document.querySelectorAll('.slider');
+        sliders.forEach(slider => {
+          slider.classList.remove('watch');
+        });
+        //remove all class which include 'watch'
+        sliderPage.classList.add('slideInRight');
+        sliderPage.classList.add('animated');
+        sliderPage.classList.add('watch');
+
+        setTimeout(() => {
+          sliderPage.classList.remove('slideInRight');
+          sliderPage.classList.remove('animated');
+        }, 1000);
+
+        switchMenu();
+      }
+
+      const radios = document.querySelectorAll('input[type=radio]');
+      radios.forEach(radio => {
+        radio.addEventListener('click', gotoPage);
+      });
+
+      let showMenu = true;
+      function switchMenu() {
+        const menu = document.querySelector('.radios');
+        if (showMenu) {
+          menu.classList.add('watch');
+          menu.classList.add('slideInLeft');
+          menu.classList.add('animated');
+          setTimeout(() => {
+            menu.classList.remove('slideInLeft')
+            menu.classList.remove('animated');
+          }, 1000);
+        }
+        else {
+          menu.classList.add('slideOutLeft');
+          menu.classList.add('animated');
+
+          setTimeout(() => {
+            menu.classList.remove('watch');
+            menu.classList.remove('slideOutLeft')
+            menu.classList.remove('animated');
+          }, 1000);
+        }
+        showMenu = !showMenu;
+      }
+
+      const ham = document.querySelector('.ham');
+      ham.addEventListener('click', switchMenu);
+
+      function backToMainPage() {
+        const sliderPage = document.querySelector(`.slider1`);
+        console.log(sliderPage);
+
+        const sliders = document.querySelectorAll('.slider');
+        sliders.forEach(slider => {
+        //   sliderPage.classList.add('slideInLeft');
+        //   sliderPage.classList.add('animated');
+        //   sliderPage.classList.add('watch');
+        //
+        //   setTimeout(() => {
+        //     sliderPage.classList.remove('slideInLeft');
+        //     sliderPage.classList.remove('animated');
+        //   }, 1000);
+        slider.classList.remove('watch');
+
+        });
+        //remove all class which include 'watch'
+        sliderPage.classList.add('slideInLeft');
+        sliderPage.classList.add('animated');
+        sliderPage.classList.add('watch');
+
+        setTimeout(() => {
+          sliderPage.classList.remove('slideInLeft');
+          sliderPage.classList.remove('animated');
+        }, 1000);
+
+        // switchMenu();
+      }
+
+      const backs = document.querySelectorAll('.aims+div');
+      backs.forEach(back => back.addEventListener('click', backToMainPage));
+    </script>
   </body>
 </html>
