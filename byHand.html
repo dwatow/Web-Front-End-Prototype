@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>滑動頁面練習(手刻版)</title>
+    <style media="screen">
+      body {
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        margin: 0;
+      }
+      /*aims*/
+
+      .slider1 .aims,
+      .slider1 .aims div {
+        border: 1px solid blue;
+      }
+
+      .slider2 .aims,
+      .slider2 .aims div {
+        border: 1px solid red;
+      }
+
+      .slider3 .aims,
+      .slider3 .aims div {
+        border: 1px solid green;
+      }
+
+      .aims {
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        width: 200px;
+        /*border: 1px blue solid;*/
+      }
+
+      .aims div {
+        flex: 1 0 48px;
+        height: 48px;
+        /*border: 1px blue solid;*/
+      }
+      /*checkbox*/
+
+      .radios {
+        position: fixed;
+        /*z-index: 1;*/
+        bottom: 0;
+        left: 0;
+        background-color: gray;
+        padding-right: 5px;
+      }
+      /*slider*/
+
+      .slider {
+        /*border: 1px red dashed;*/
+        width: 100vw;
+        height: 100vh;
+        overflow-y: scroll;
+
+        position: absolute;
+        top: 0;
+
+        transition: left 1s cubic-bezier(0.4, 1.1, 0.83, 1.02);
+      }
+      /*change watch*/
+
+      .watch2 .slider1,
+      .watch3 .slider1,
+      .watch3 .slider2 {
+        left: -100vw;
+        overflow: hidden;
+      }
+
+      .watch1 .slider1,
+      .watch2 .slider2,
+      .watch3 .slider3 {
+        /*watching*/
+        left: 0;
+      }
+
+      .watch1 .slider2,
+      .watch2 .slider3,
+      .watch1 .slider3 {
+        left: 100vw;
+        overflow: hidden;
+      }
+
+    </style>
+  </head>
+  <body class="watch1">
+    <div class="slider slider1">
+      <div class="aims"></div>
+
+    </div>
+    <div class="slider slider2">
+      <div class="aims"></div>
+
+    </div>
+    <div class="slider slider3">
+      <div class="aims"></div>
+    </div>
+    <!-- <div class="slider_page watch1">
+    </div> -->
+    <div class="radios">
+      <div>
+        <input id="watch1" name="curr_watch" type="radio" checked/><label for="watch1">Slider1</label>
+      </div>
+      <div>
+        <input id="watch2" name="curr_watch" type="radio" /><label for="watch2">Slider2</label>
+      </div>
+      <div>
+        <input id="watch3" name="curr_watch" type="radio" /><label for="watch3">Slider3</label>
+      </div>
+    </div>
+    <script type="text/javascript">
+      const aims = document.querySelectorAll('.aims');
+      aims.forEach(aim => {
+        const totalAims = 120;
+        for (var i = 0; i < totalAims; i++) {
+          const box = document.createElement('div');
+          aim.appendChild(box);
+        }
+      });
+
+
+      function changePage() {
+        const sliderPage = document.querySelector('body');
+        //remove all class which include 'watch'
+        radios.forEach(radio => {
+          sliderPage.classList.remove(radio.id);
+          console.log(radio.id);
+        });
+        //add target class
+        sliderPage.classList.add(this.id);
+      }
+
+      const radios = document.querySelectorAll('input[type=radio]');
+      radios.forEach(radio => {
+        radio.addEventListener('click', changePage);
+      });
+    </script>
+  </body>
+</html>
