@@ -69,7 +69,9 @@
 
       .slider {
         /*border: 1px red dashed;*/
-        position: relative;
+        position: absolute;
+        left: 0;
+        top: 0;
         display: none;
         width: 100vw;
         height: 100vh;
@@ -93,23 +95,23 @@
       <div class="slider slider2">
         <div class="aims"></div>
         <div>
-          <i class="fa fa-arrow-circle-left"></i>
+          <i class="fa fa-arrow-left"></i>
         </div>
 
       </div>
       <div class="slider slider3">
         <div class="aims"></div>
         <div>
-          <i class="fa fa-arrow-circle-left"></i>
+          <i class="fa fa-arrow-left"></i>
         </div>
       </div>
     </div>
 
     <div class="ham">
-      <i class="fa fa-align-justify"></i>
+      <i class="fa fa-bars"></i>
     </div>
 
-    <div class="radios">
+    <div class="radios animated slideOutLeft">
       <h2>menu</h2>
       <!-- <div>
         <input id="slider1" name="curr_watch" type="radio" checked/><label for="slider1">Slider1</label>
@@ -131,23 +133,44 @@
         }
       });
 
+      let showMenu = true;
+      function switchMenu() {
+        const menu = document.querySelector('.radios');
+        if (showMenu) {
+          menu.classList.add('watch');
+          menu.classList.remove('slideOutLeft')
+
+          menu.classList.add('slideInLeft');
+          menu.addEventListener('transitioned', () => {
+            menu.classList.remove('slideInLeft');
+          }, {ones: true});
+        }
+        else {
+          menu.classList.add('slideOutLeft');
+        }
+        showMenu = !showMenu;
+      }
+
+      const ham = document.querySelector('.ham');
+      ham.addEventListener('click', switchMenu);
+
+
+
       function gotoPage() {
-        const sliderPage = document.querySelector(`.${this.id}`);
-        console.log(sliderPage);
-
-        const sliders = document.querySelectorAll('.slider');
-        sliders.forEach(slider => {
-          slider.classList.remove('watch');
+        const not1Sliders = document.querySelectorAll('.slider:not(:nth-child(1))');
+        not1Sliders.forEach(slider => {
+          slider.classList.add('animated', 'slideOutRight');
         });
-        //remove all class which include 'watch'
-        sliderPage.classList.add('slideInRight');
-        sliderPage.classList.add('animated');
-        sliderPage.classList.add('watch');
 
-        setTimeout(() => {
-          sliderPage.classList.remove('slideInRight');
-          sliderPage.classList.remove('animated');
-        }, 1000);
+        const mainPage = document.querySelector(`.slider1`);
+        mainPage.classList.add('watch', 'animated', 'slideOutLeft');
+
+        const currSliderPage = document.querySelector(`.${this.id}`);
+        currSliderPage.classList.remove('slideOutRight');
+        currSliderPage.classList.add('watch', 'animated', 'slideInRight');
+        currSliderPage.addEventListener('transitioned', () => {
+          currSliderPage.classList.remove('slideInRight');
+        }, {ones: true});
 
         switchMenu();
       }
@@ -157,62 +180,20 @@
         radio.addEventListener('click', gotoPage);
       });
 
-      let showMenu = true;
-      function switchMenu() {
-        const menu = document.querySelector('.radios');
-        if (showMenu) {
-          menu.classList.add('watch');
-          menu.classList.add('slideInLeft');
-          menu.classList.add('animated');
-          setTimeout(() => {
-            menu.classList.remove('slideInLeft')
-            menu.classList.remove('animated');
-          }, 1000);
-        }
-        else {
-          menu.classList.add('slideOutLeft');
-          menu.classList.add('animated');
-
-          setTimeout(() => {
-            menu.classList.remove('watch');
-            menu.classList.remove('slideOutLeft')
-            menu.classList.remove('animated');
-          }, 1000);
-        }
-        showMenu = !showMenu;
-      }
-
-      const ham = document.querySelector('.ham');
-      ham.addEventListener('click', switchMenu);
 
       function backToMainPage() {
-        const sliderPage = document.querySelector(`.slider1`);
-        console.log(sliderPage);
 
-        const sliders = document.querySelectorAll('.slider');
-        sliders.forEach(slider => {
-        //   sliderPage.classList.add('slideInLeft');
-        //   sliderPage.classList.add('animated');
-        //   sliderPage.classList.add('watch');
-        //
-        //   setTimeout(() => {
-        //     sliderPage.classList.remove('slideInLeft');
-        //     sliderPage.classList.remove('animated');
-        //   }, 1000);
-        slider.classList.remove('watch');
-
+        const not1Sliders = document.querySelectorAll('.slider:not(:nth-child(1))');
+        not1Sliders.forEach(slider => {
+          slider.classList.add('animated', 'slideOutRight');
         });
-        //remove all class which include 'watch'
-        sliderPage.classList.add('slideInLeft');
-        sliderPage.classList.add('animated');
-        sliderPage.classList.add('watch');
 
-        setTimeout(() => {
-          sliderPage.classList.remove('slideInLeft');
-          sliderPage.classList.remove('animated');
-        }, 1000);
-
-        // switchMenu();
+        const mainPage = document.querySelector(`.slider1`);
+        mainPage.classList.remove('slideOutLeft');
+        mainPage.classList.add('watch', 'animated', 'slideInLeft');
+        currSliderPage.addEventListener('transitioned', () => {
+          mainPage.classList.remove('slideInLeft');
+        }, {ones: true});
       }
 
       const backs = document.querySelectorAll('.aims+div');
