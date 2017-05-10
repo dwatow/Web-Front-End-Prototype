@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
     <title>滑動頁面練習(手刻版)</title>
     <style media="screen">
       body {
@@ -9,6 +10,7 @@
         overflow-x: hidden;
         overflow-y: hidden;
         margin: 0;
+        /*background-color: #c0c0c0;*/
       }
       /*aims*/
 
@@ -87,28 +89,30 @@
 
     </style>
   </head>
-  <body class="watch1">
-    <div class="slider slider1">
-      <div class="aims"></div>
+  <body>
+    <div class="watch1">
+      <div class="slider slider1">
+        <div class="aims"></div>
 
-    </div>
-    <div class="slider slider2">
-      <div class="aims"></div>
-
-    </div>
-    <div class="slider slider3">
-      <div class="aims"></div>
-    </div>
-
-    <div class="radios">
-      <div>
-        <input id="watch1" name="curr_watch" type="radio" checked/><label for="watch1">Slider1</label>
       </div>
-      <div>
-        <input id="watch2" name="curr_watch" type="radio" /><label for="watch2">Slider2</label>
+      <div class="slider slider2">
+        <div class="aims"></div>
+
       </div>
-      <div>
-        <input id="watch3" name="curr_watch" type="radio" /><label for="watch3">Slider3</label>
+      <div class="slider slider3">
+        <div class="aims"></div>
+      </div>
+
+      <div class="radios">
+        <div>
+          <input id="watch1" name="curr_watch" type="radio" checked/><label for="watch1">Slider1</label>
+        </div>
+        <div>
+          <input id="watch2" name="curr_watch" type="radio" /><label for="watch2">Slider2</label>
+        </div>
+        <div>
+          <input id="watch3" name="curr_watch" type="radio" /><label for="watch3">Slider3</label>
+        </div>
       </div>
     </div>
     <script type="text/javascript">
@@ -123,7 +127,7 @@
 
 
       function changePage() {
-        const sliderPage = document.querySelector('body');
+        const sliderPage = document.querySelector('body>div');
         //remove all class which include 'watch'
         radios.forEach(radio => {
           sliderPage.classList.remove(radio.id);
