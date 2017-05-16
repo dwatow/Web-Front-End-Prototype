@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./jquery-3.2.1.js"></script>
+    <style media="screen">
+      body {
+        overflow-y: hidden;
+        margin: 0;
+      }
+
+      .aims {
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        width: 500px;
+      }
+
+      .aims div {
+        flex: 1 0 48px;
+        width: 48px;
+        height: 48px;
+      }
+
+      .parallax__layer--base div {
+        border: 1px black solid;
+      }
+
+      .parallax__layer--back div {
+        border: 1px blue solid;
+      }
+
+      .parallax {
+        perspective: 1px;
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      .parallax__group {
+        position: relative;
+        height: 100vh;
+        transform-style: preserve-3d;
+      }
+
+      .parallax__layer--base {
+        transform: translateZ(0);
+      }
+
+      .parallax__layer--back {
+        transform: translateZ(-1px) scale(2);
+      }
+
+      .parallax__layer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+
+      .menu {
+        position: fixed;
+        left: 0;
+        top: 20vh;
+      }
+
+      a {
+        text-decoration-style: wavy;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="parallax">
+      <div id="s1" class="parallax__group">
+        <div class="parallax__layer parallax__layer--back">
+          <div class="aims"></div>
+        </div>
+      </div>
+      <div id="s2" class="parallax__group">
+        <div class="parallax__layer parallax__layer--base">
+          <div class="aims"></div>
+        </div>
+      </div>
+      <div id="s3" class="parallax__group">
+        <div class="parallax__layer parallax__layer--back">
+          <div class="aims"></div>
+        </div>
+      </div>
+      <div class="parallax__group">
+        <div class="parallax__layer parallax__layer--base">
+          <div class="aims"></div>
+        </div>
+      </div>
+      <div class="parallax__group">
+        <div class="parallax__layer parallax__layer--back">
+          <div class="aims"></div>
+        </div>
+      </div>
+      <div class="parallax__group">
+        <div class="parallax__layer parallax__layer--base">
+          <div class="aims"></div>
+        </div>
+      </div>
+    </div>
+    <div class="menu">
+      <div>
+        <a href="#s1">o</a>
+      </div>
+      <div>
+        <a href="#s2">o</a>
+      </div>
+      <div>
+        <a href="#s3">o</a>
+      </div>
+    </div>
+    <script type="text/javascript">
+  const aims = document.querySelectorAll('.aims');
+
+  aims.forEach(aim => {
+    const totalAims = 60;
+    for(var i = 0; i < totalAims; i++) {
+      const box = document.createElement('div');
+      aim.appendChild(box);
+    }
+  });
+
+
+    (function() {
+      var container = $('.parallax');
+
+      $('a').click(function() {
+        var target = $($.attr(this, 'href'));
+        console.log(target);
+        container.animate({
+            scrollTop: container.scrollTop() + target.offset().top
+        }, 250);
+        return false;
+      });
+    }());
+
+  </script>
+
+  </body>
+</html>
