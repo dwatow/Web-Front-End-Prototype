@@ -9,31 +9,25 @@
         margin: 0;
       }
 
-      .parallax__layer--base .aims {
+      .aims {
         margin: 0 auto;
         display: flex;
         flex-wrap: wrap;
         width: 500px;
+        /*height: 600px;*/
+      }
+
+      .aims div {
+        flex: 1 0 48px;
+        width: 48px;
+        height: 48px;
+      }
+
+      .parallax__layer--base div {
         border: 1px black solid;
       }
 
-      .parallax__layer--base .aims div {
-        flex: 1 0 48px;
-        height: 48px;
-        border: 1px black solid;
-      }
-
-      .parallax__layer--back .aims {
-        margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        width: 500px;
-        border: 1px blue solid;
-      }
-
-      .parallax__layer--back .aims div {
-        flex: 1 0 48px;
-        height: 48px;
+      .parallax__layer--back div {
         border: 1px blue solid;
       }
 
@@ -42,6 +36,12 @@
         height: 100vh;
         overflow-x: hidden;
         overflow-y: auto;
+      }
+
+      .parallax__group {
+        position: relative;
+        height: 50vh;
+        transform-style: preserve-3d;
       }
 
       .parallax__layer--base {
@@ -53,35 +53,43 @@
       }
 
     </style>
+
   </head>
   <body>
     <div class="parallax">
-      <div class="parallax__layer--base">
-        <div class="aims"></div>
+      <div class="parallax__group">
+        <div class="parallax__layer--base">
+          <div class="aims"></div>
+        </div>
+        <div class="parallax__layer--back">
+          <div class="aims"></div>
+        </div>
       </div>
-      <div class="parallax__layer--back">
-        <div class="aims"></div>
+      <div class="parallax__group">
+        <div class="parallax__layer--base">
+          <div class="aims"></div>
+        </div>
       </div>
-      <div class="parallax__layer--base">
-        <div class="aims"></div>
-      </div>
-      <div class="parallax__layer--back">
-        <div class="aims"></div>
-      </div>
-      <div class="parallax__layer--base">
-        <div class="aims"></div>
+      <div class="parallax__group">
+        <div class="parallax__layer--base">
+          <div class="aims"></div>
+        </div>
+        <div class="parallax__layer--back">
+          <div class="aims"></div>
+        </div>
       </div>
     </div>
+    <!-- <script type="text/javascript" src="./index.js"></script> -->
     <script type="text/javascript">
-      const aims = document.querySelectorAll('.aims');
+    const aims = document.querySelectorAll('.aims');
 
-      aims.forEach(aim => {
-        const totalAims = 50;
-        for (var i = 0; i < totalAims; i++) {
-          const box = document.createElement('div');
-          aim.appendChild(box);
-        }
-      });
+    aims.forEach(aim => {
+      const totalAims = 60;
+      for(var i = 0; i < totalAims; i++) {
+        const box = document.createElement('div');
+        aim.appendChild(box);
+      }
+    });
 
     </script>
   </body>
