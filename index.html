@@ -40,7 +40,7 @@
 
       .parallax__group {
         position: relative;
-        height: 50vh;
+        height: 100vh;
         transform-style: preserve-3d;
       }
 
@@ -51,6 +51,13 @@
       .parallax__layer--back {
         transform: translateZ(-1px) scale(2);
       }
+      /*.parallax__layer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }*/
 
     </style>
 
@@ -58,9 +65,6 @@
   <body>
     <div class="parallax">
       <div class="parallax__group">
-        <div class="parallax__layer--base">
-          <div class="aims"></div>
-        </div>
         <div class="parallax__layer--back">
           <div class="aims"></div>
         </div>
@@ -71,10 +75,22 @@
         </div>
       </div>
       <div class="parallax__group">
+        <div class="parallax__layer--back">
+          <div class="aims"></div>
+        </div>
+      </div>
+      <div class="parallax__group">
         <div class="parallax__layer--base">
           <div class="aims"></div>
         </div>
+      </div>
+      <div class="parallax__group">
         <div class="parallax__layer--back">
+          <div class="aims"></div>
+        </div>
+      </div>
+      <div class="parallax__group">
+        <div class="parallax__layer--base">
           <div class="aims"></div>
         </div>
       </div>
