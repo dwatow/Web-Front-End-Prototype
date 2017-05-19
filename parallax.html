@@ -50,7 +50,7 @@
         margin: 0 auto;
         display: flex;
         flex-wrap: wrap;
-        width: 200px;
+        width: 500px;
         /*border: 1px blue solid;*/
       }
 
@@ -76,11 +76,17 @@
       }
       /*slider*/
 
+      .slider2,
+      .slider3 {
+        background-color: rgba(180, 180, 180, 0.9);
+      }
+
       .slider {
-        /*border: 1px red dashed;*/
+
         width: 100vw;
         height: 100vh;
-        overflow: scroll;
+        overflow-y: scroll;
+        overflow-x: scroll;
 
         position: absolute;
         top: 0;
@@ -158,7 +164,7 @@
     <script type="text/javascript">
       const aims = document.querySelectorAll('.aims');
       aims.forEach(aim => {
-        const totalAims = 120;
+        const totalAims = 126;
         for (var i = 0; i < totalAims; i++) {
           const box = document.createElement('div');
           aim.appendChild(box);
