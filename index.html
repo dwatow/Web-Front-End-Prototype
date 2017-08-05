@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>串API的練習</title>
+    </head>
+    <body>
+        <pre>
+
+
+        </pre>
+
+    </body>
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+    <script type="text/javascript">
+    const dataid = 'F-D0047-091'
+    const apikey = 'CWB-81E3A4E0-7B70-47EF-B53C-148079419530'
+    const url = `http://opendata.cwb.gov.tw/opendataapi?dataid=${dataid}&authorizationkey=${apikey}`
+    // const kaohurl = 'http://data.kcg.gov.tw/api/action/datastore_search?resource_id=cd53c749-abeb-47db-b58c-5954d6c337a1&limit=5'
+
+    function reqListener () {
+        const pre = querySelector('pre');
+        pre.innerHTML = this.responseText;
+    };
+
+    var xhr = new XMLHttpRequest();
+    xhr.onload = reqListener;
+    xhr.open("get", url, true);
+
+    // xhr.setRequestHeader('X-PINGOTHER', 'pingpong');
+    // xhr.setRequestHeader('Content-Type', 'application/xml');
+    xhr.send();
+
+
+
+
+    </script>
+</html>
