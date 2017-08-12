@@ -28,25 +28,6 @@
     .box3 {
       height: 300vh;
     }
-
-    .dashboard {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      margin: auto;
-      width: 100%;
-    }
-
-    .line {
-      width: 100vw;
-      height: 1px;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 100vh;
-      background-color: red;
-    }
     </style>
 </head>
 <body>
@@ -60,26 +41,16 @@
       <div class="box box3">
         <div class="section3">box3</div>
       </div>
-      <div class="line"></div>
     </div>
-    <div class="dashboard">
-      <div>
-        View: 0, <span class="viewHeight">1</span>
-      </div>
-      <div>
-        box2: <span class="box2top">1</span>, <span class="box2bottom">1</span>
-      </div>
-    </div>
-    <script src="http://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <script src="./jquery-3.2.1.min.js"></script>
     <script src="./scrollsection.js"></script>
     <!-- <script src="./scrollfucky.js"></script> -->
     <script type="text/javascript">
     //dash board
-      var scrollsection = new scrollsection({
+      scrollSection({
         container: '.view',
         section: '.box'
       })
-      $('.viewHeight').html(window.innerHeight);
 
     </script>
 </body>

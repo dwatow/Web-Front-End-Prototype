@@ -1,4 +1,4 @@
-(function scrollSection (config) {
+function scrollSection (config) {
   "use strict";
   var container = $(config.container);
   var sections = $(config.section);
@@ -99,7 +99,9 @@
     isUp = currentY > lastY;
     lastY = currentY;
   })
-})({
+}
+
+scrollSection({
   container: '.view',
   section: '.box'
 })
