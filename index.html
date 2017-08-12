@@ -8,7 +8,6 @@
     <style media="screen">
     body, html {
       margin: 0;
-      overflow: hidden;
     }
 
     .view {
@@ -77,13 +76,16 @@
     <!-- <script src="./scrollfucky.js"></script> -->
     <script type="text/javascript">
     //dash board
-      scrollSection({
-        container: '.view',
-        section: '.box'
-      })
+      $(document).scrollTo(0);
       $(document).ready(function() {
+
+        $(this).css('overflow', 'hidden');
         setTimeout(function(){
-        $(document).scrollTo(0); }, 10);
+          scrollSection({
+            container: '.view',
+            section: '.box'
+          })
+        }, 10);
       });
     </script>
 </body>
