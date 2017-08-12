@@ -2,6 +2,8 @@
 
 scroll of page will divided into sections or segments, like slider in or slider out each other section.
 
+[Live Demo](https://dwatow.github.io/scrollSection/)
+
 # Usage
 
 example:
