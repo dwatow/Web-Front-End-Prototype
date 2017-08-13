@@ -81,7 +81,8 @@
         這是footer，請回轉。
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </footer>
-      <div class="line"></div>
+      <div class="topLine line"></div>
+      <div class="bottomLine line"></div>
     </div>
     <script src="./jquery-3.2.1.min.js"></script>
     <script src="./scrollsection.js"></script>
@@ -97,11 +98,13 @@
 
           $(document).off('scroll', hiddenUrl)
           $('.view').one('scroll', hiddenUrl)
-          
-          scrollSection.initial({
-            container: $('.view'),
-            section: $('.box')
-          });
+
+          if (!scrollSection._scrollTopTargets.hasOwnProperty('box box1')) {
+            scrollSection.initial({
+              container: $('.view'),
+              section: $('.box')
+            });
+          }
         }
         else {
           $('body').css('overflow', 'scroll')
@@ -109,22 +112,25 @@
           $(document).one('scroll', hiddenUrl)
           $('.view').off('scroll', hiddenUrl)
         }
-      // origDeltaHeight = currDeltaHeight;
-    }
-
-    $(document).one('scroll', hiddenUrl)
-
-
-      function lineBoxTop (selector) {
-        const line = scrollSection._scrollTopTargets[$(selector).attr('class')];
-        $('.line').css('top', `${line}px`);
-        return line;
       }
-      function lineBoxBottom (selector) {
-        const line = scrollSection._scrollBottomTargets[$(selector).attr('class')];
-        $('.line').css('top', `${line}px`);
-        return line;
+
+      $(document).one('scroll', hiddenUrl)
+
+
+      function line (selector) {
+        const topLine = scrollSection._scrollTopTargets[$(selector).attr('class')];
+        $('.topLine').css('top', `${topLine}px`);
+        const bottomline = scrollSection._scrollBottomTargets[$(selector).attr('class')];
+        $('.bottomLine').css('top', `${bottomline}px`);
+        return [topLine, bottomline];
       }
+
+      function backTop(height) {
+        $('.view').animate({
+          scrollTop: height
+        }, 600);
+      }
+
 
     </script>
 </body>
