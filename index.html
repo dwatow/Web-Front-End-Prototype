@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" /> -->
+    <!-- <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" /> -->
     <title>Document</title>
     <style media="screen">
     body, html {
@@ -13,7 +16,6 @@
     .view {
       position: relative;
       overflow: scroll;
-      height: 100vh;
       width: 100vw;
     }
 
@@ -75,18 +77,34 @@
     <script src="./scrollsection.js"></script>
     <!-- <script src="./scrollfucky.js"></script> -->
     <script type="text/javascript">
+    var deltaHeight = 99999;
+    function hiddenUrl() {
+      var currDeltaHeight = screen.height - window.innerHeight;
+      console.log(deltaHeight, currDeltaHeight);
+      if (deltaHeight === currDeltaHeight) {
+        $('body').css('overflow', 'hidden')
+        $('.view').css('overflow', 'scroll').css('height', '100vh')
+      }
+      else {
+        $(document).one('scroll', hiddenUrl)
+      }
+      deltaHeight = currDeltaHeight;
+    }
+
+    $(document).one('scroll', hiddenUrl)
+
+
     //dash board
       $(document).ready(function() {
-        $(document).scrollTop();
+        scrollSection({
+          container: '.view',
+          section: '.box'
+        })
 
-        $(this).css('overflow', 'hidden');
-        setTimeout(function(){
-          scrollSection({
-            container: '.view',
-            section: '.box'
-          })
-        }, 10);
+
+
       });
+
     </script>
 </body>
 </html>
