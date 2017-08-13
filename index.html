@@ -27,6 +27,15 @@
       border: 1px solid #ccc;
       background-color: #ccc;
     }
+
+    .line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 1px;
+      width: 100%;
+      background-color: red;
+    }
     </style>
 </head>
 <body>
@@ -72,37 +81,33 @@
         這是footer，請回轉。
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </footer>
+      <div class="line"></div>
     </div>
     <script src="./jquery-3.2.1.min.js"></script>
     <script src="./scrollsection.js"></script>
     <!-- <script src="./scrollfucky.js"></script> -->
     <script type="text/javascript">
-    var deltaHeight = 99999;
-    function hiddenUrl() {
-      var currDeltaHeight = screen.height - window.innerHeight;
-      console.log(deltaHeight, currDeltaHeight);
-      if (deltaHeight === currDeltaHeight) {
-        $('body').css('overflow', 'hidden')
-        $('.view').css('overflow', 'scroll').css('height', '100vh')
+      var deltaHeight = 99999;
+      function hiddenUrl() {
+        var currDeltaHeight = screen.height - window.innerHeight;
+        console.log(deltaHeight, currDeltaHeight);
+        if (deltaHeight === currDeltaHeight) {
+          $('body').css('overflow', 'hidden')
+          $('.view').css('overflow', 'scroll').css('height', '100vh')
+        }
+        else {
+          $(document).one('scroll', hiddenUrl)
+        }
+        deltaHeight = currDeltaHeight;
       }
-      else {
-        $(document).one('scroll', hiddenUrl)
-      }
-      deltaHeight = currDeltaHeight;
-    }
 
-    $(document).one('scroll', hiddenUrl)
+      $(document).one('scroll', hiddenUrl)
 
 
-    //dash board
-      $(document).ready(function() {
-        scrollSection({
-          container: '.view',
-          section: '.box'
-        })
-
-
-
+      //dash board
+      scrollSection.initial({
+        container: $('.view'),
+        section: $('.box')
       });
 
     </script>
