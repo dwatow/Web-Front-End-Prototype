@@ -91,7 +91,7 @@
       var origDeltaHeight = screen.height - window.innerHeight;
       function hiddenUrl() {
         var currDeltaHeight = screen.height - window.innerHeight;
-        if (currDeltaHeight < origDeltaHeight) {
+        if (currDeltaHeight < origDeltaHeight || screen.width >= 768) {
 
           $('body').css('overflow', 'hidden')
           $('.view').css('overflow', 'scroll').css('height', '100vh')
