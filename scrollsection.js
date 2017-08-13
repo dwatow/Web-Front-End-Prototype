@@ -77,20 +77,38 @@ var scrollSection = {
   },
 
   // limit test
-  _inViewTop: function (element) {
-    const rect = element.get(0).getBoundingClientRect();
-    const boxBottom = rect.top + rect.height;
-    const viewTop1 = 0;
-    const viewTop2 = viewTop1 + window.innerHeight * 0.1;
-    return boxBottom > viewTop1 && boxBottom < viewTop2; //in view top
-  },
-
-  _isBottomLine: function (element) {
+  _inViewOuterTop: function (element) {
     const rect = element.get(0).getBoundingClientRect();
     const boxTop = rect.top;
-    const viewBottom1 = window.innerHeight;
-    const viewBottom2 = viewBottom1 - window.innerHeight * 0.1;
-    return boxTop < viewBottom1 && boxTop > viewBottom2;
+    const viewTop1 = 0 - 2 - window.innerHeight * 0.1;
+    const viewTop2 = 0 - 2;
+    console.log('inViewOuterTop', boxTop, viewTop1, viewTop2);
+    return boxTop > viewTop1 && boxTop < viewTop2;
+  },
+  _inViewInnerTop: function (element) {
+    const rect = element.get(0).getBoundingClientRect();
+    const boxBottom = rect.top + rect.height;
+    const viewTop1 = 0 + 2;
+    const viewTop2 = 0 + 2 + window.innerHeight * 0.1;
+    console.log('inViewInnerTop', boxBottom, viewTop1, viewTop2);
+    return boxBottom > viewTop1 && boxBottom < viewTop2;
+  },
+
+  _isViewInnerBottom: function (element) {
+    const rect = element.get(0).getBoundingClientRect();
+    const boxTop = rect.top;
+    const viewBottom1 = window.innerHeight - 2 - window.innerHeight * 0.1;
+    const viewBottom2 = window.innerHeight - 2;
+    console.log('isViewInnerBottom', boxTop > viewBottom1 && boxTop < viewBottom2);
+    return boxTop > viewBottom1 && boxTop < viewBottom2;
+  },
+  _isViewOuterBottom: function (element) {
+    const rect = element.get(0).getBoundingClientRect();
+    const boxBottom = rect.top + rect.height;
+    const viewBottom1 = window.innerHeight + 2;
+    const viewBottom2 = window.innerHeight + 2 + window.innerHeight * 0.1;
+    console.log('isViewOuterBottom', boxBottom > viewBottom1 && boxBottom < viewBottom2);
+    return boxBottom > viewBottom1 && boxBottom < viewBottom2;
   },
 
 
@@ -98,25 +116,21 @@ var scrollSection = {
   _scrollToSection: function (e) {
 
     _this._sections.each(function () {
-      _this._scrollTopElement = $(this);
-      console.log('_this._scrollTopElement = $(this);', $(this));
+      if (_this._isScrollTop) return;
+      console.log('currElement: ', $(this));
 
-      // if (_this.isUp && _this._inViewTop(_this._scrollTopElement)) {
-      if (!_this._isScrollTop && _this.isUp && _this._inViewTop(_this._scrollTopElement)) {
-        // _this._container.off('scroll', _this._scrollToSection)
-        console.log($(this));
-
+      // if (_this.isUp && _this._inViewInnerTop($(this)) ) {
+      if (_this.isUp && _this._inViewInnerTop($(this)) ||
+         !_this.isUp && _this._isViewOuterBottom($(this)) ) {
+        _this._scrollTopElement = $(this);
         _this._isScrollTop = true;
-        // _this._container.one('scroll', _this._backBottom);
         _this._backBottom();
       }
-      // else if (!_this.isUp && _this._isBottomLine(_this._scrollTopElement)) {
-      else if (!_this._isScrollTop && !_this.isUp && _this._isBottomLine(_this._scrollTopElement)) {
-        // _this._container.off('scroll', _this._scrollToSection)
-        console.log($(this));
-
+      // else if (!_this.isUp && _this._isViewInnerBottom($(this)) ) {
+      else if (!_this.isUp && _this._isViewInnerBottom($(this)) ||
+                _this.isUp && _this._inViewOuterTop($(this)) ) {
+        _this._scrollTopElement = $(this);
         _this._isScrollTop = true;
-        // _this._container.one('scroll', _this._backTop);
         _this._backTop();
       }
     });
