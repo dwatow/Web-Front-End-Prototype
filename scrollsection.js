@@ -3,8 +3,9 @@ var scrollSection = {
   _container: $('.view'),
   _sections: $('.box'),
 
-  _scrollTopTargets: {},
-  _scrollBottomTargets: {},
+  // find direct
+  isUp: false,
+  lastY: undefined,
 
   initial: function (config) {
     _this = this;
@@ -21,11 +22,12 @@ var scrollSection = {
       isUp = currentY > _this.lastY;
       _this.lastY = currentY;
     })
-    
+
     _this._calcSection();
   },
 
-
+  _scrollTopTargets: {},
+  _scrollBottomTargets: {},
 
   _calcSection: function () {
     _this._sections.each (function () {
@@ -102,8 +104,4 @@ var scrollSection = {
       }
     });
   },
-
-  // find direct
-  isUp: false,
-  lastY: undefined,
 }

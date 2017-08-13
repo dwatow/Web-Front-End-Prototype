@@ -94,6 +94,12 @@
         if (deltaHeight === currDeltaHeight) {
           $('body').css('overflow', 'hidden')
           $('.view').css('overflow', 'scroll').css('height', '100vh')
+
+          scrollSection.initial({
+            container: $('.view'),
+            section: $('.box')
+          });
+
         }
         else {
           $(document).one('scroll', hiddenUrl)
@@ -105,10 +111,6 @@
 
 
       //dash board
-      scrollSection.initial({
-        container: $('.view'),
-        section: $('.box')
-      });
 
     </script>
 </body>
