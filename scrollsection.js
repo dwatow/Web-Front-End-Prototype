@@ -40,26 +40,30 @@ var scrollSection = {
   },
 
   //scroll top
-  _isScrollTop: false,
   _scrollTopElement: undefined,
   _backTop: function () {
     if (_this._scrollTopElement === undefined) return
+    _this._container.off('scroll', _this._scrollToSection)
+
+
     _this._container.animate({
       scrollTop: _this._scrollTopTargets[_this._scrollTopElement.attr('class')]
     }, 600);
     setTimeout(function () {
-      _this._isScrollTop = false;
+      _this._container.on('scroll', _this._scrollToSection)
     }, 650);
     _this._scrollTopElement = undefined;
   },
 
   _backBottom: function () {
     if (_this._scrollTopElement === undefined) return
+    _this._container.off('scroll', _this._scrollToSection)
+
     _this._container.animate({
       scrollTop: _this._scrollBottomTargets[_this._scrollTopElement.attr('class')]
     }, 600);
     setTimeout(function () {
-      _this._isScrollTop = false;
+      _this._container.on('scroll', _this._scrollToSection)
     }, 650);
     _this._scrollTopElement = undefined;
   },
@@ -89,6 +93,7 @@ var scrollSection = {
       _this._scrollTopElement = $(this);
 
       if (!_this._isScrollTop && isUp && _this._inViewTop(_this._scrollTopElement)) {
+        console.log($(this));
         $('.box2top').css('color', 'red');
         $('.box2bottom').css('color', 'black');
 
@@ -96,6 +101,7 @@ var scrollSection = {
         _this._container.one('scroll', _this._backBottom);
       }
       else if (!_this._isScrollTop && !isUp && _this._isBottomLine(_this._scrollTopElement)) {
+        console.log($(this));
         $('.box2bottom').css('color', 'red');
         $('.box2top').css('color', 'black');
 

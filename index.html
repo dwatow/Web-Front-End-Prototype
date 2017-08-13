@@ -87,30 +87,44 @@
     <script src="./scrollsection.js"></script>
     <!-- <script src="./scrollfucky.js"></script> -->
     <script type="text/javascript">
-      var deltaHeight = 99999;
+      var origDeltaHeight = screen.height - window.innerHeight;
       function hiddenUrl() {
         var currDeltaHeight = screen.height - window.innerHeight;
-        console.log(deltaHeight, currDeltaHeight);
-        if (deltaHeight === currDeltaHeight) {
+        if (currDeltaHeight < origDeltaHeight) {
+
           $('body').css('overflow', 'hidden')
           $('.view').css('overflow', 'scroll').css('height', '100vh')
 
+          $(document).off('scroll', hiddenUrl)
+          $('.view').one('scroll', hiddenUrl)
+          
           scrollSection.initial({
             container: $('.view'),
             section: $('.box')
           });
-
         }
         else {
+          $('body').css('overflow', 'scroll')
+          $('.view').css('overflow', 'hidden').css('height', 'auto')
           $(document).one('scroll', hiddenUrl)
+          $('.view').off('scroll', hiddenUrl)
         }
-        deltaHeight = currDeltaHeight;
+      // origDeltaHeight = currDeltaHeight;
+    }
+
+    $(document).one('scroll', hiddenUrl)
+
+
+      function lineBoxTop (selector) {
+        const line = scrollSection._scrollTopTargets[$(selector).attr('class')];
+        $('.line').css('top', `${line}px`);
+        return line;
       }
-
-      $(document).one('scroll', hiddenUrl)
-
-
-      //dash board
+      function lineBoxBottom (selector) {
+        const line = scrollSection._scrollBottomTargets[$(selector).attr('class')];
+        $('.line').css('top', `${line}px`);
+        return line;
+      }
 
     </script>
 </body>
