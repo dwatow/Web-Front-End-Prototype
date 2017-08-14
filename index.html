@@ -88,31 +88,10 @@
     <script src="./scrollsection.js"></script>
     <!-- <script src="./scrollfucky.js"></script> -->
     <script type="text/javascript">
-      var origDeltaHeight = screen.height - window.innerHeight;
-      function hiddenUrl() {
-        var currDeltaHeight = screen.height - window.innerHeight;
-        if (currDeltaHeight < origDeltaHeight || screen.width >= 768) {
-
-          $('body').css('overflow', 'hidden')
-          $('.view').css('overflow', 'scroll').css('height', '100vh')
-
-          $(document).off('scroll', hiddenUrl)
-          $('.view').one('scroll', hiddenUrl)
-
-          if (!scrollSection._scrollTopTargets.hasOwnProperty('box box1')) {
-            scrollSection.initial({
-              container: $('.view'),
-              section: $('.box')
-            });
-          }
-        }
-        else {
-          $('body').css('overflow', 'scroll')
-          $('.view').css('overflow', 'hidden').css('height', 'auto')
-          $(document).one('scroll', hiddenUrl)
-          $('.view').off('scroll', hiddenUrl)
-        }
-      }
+      scrollSection.initial({
+        container: $('.view'),
+        section: $('.box')
+      });
 
       $(document).one('scroll', hiddenUrl)
 

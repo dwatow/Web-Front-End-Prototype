@@ -13,7 +13,41 @@ var scrollSection = {
     _this._container = config.container;
     _this._sections = config.section;
 
-    _this._container.on('scroll', _this._scrollToSection)
+    $(document).one('scroll', _this.hiddenUrl)
+    _this.hiddenUrl();
+  },
+
+  _beginScroll: function () {
+    _this._bindEvent();
+    _this._calcSection();
+  },
+
+  origDeltaHeight: screen.height - window.innerHeight,
+  hiddenUrl: function () {
+    var currDeltaHeight = screen.height - window.innerHeight;
+    if (currDeltaHeight < _this.origDeltaHeight || screen.width >= 768) {
+
+      $('body').css('overflow', 'hidden')
+      _this._container.css('overflow', 'scroll').css('height', '100vh')
+
+      $(document).off('scroll',_this.hiddenUrl)
+      _this._container.one('scroll', _this.hiddenUrl)
+
+      if (!scrollSection._scrollTopTargets.hasOwnProperty('box box1')) {
+        _this._beginScroll();
+      }
+    }
+    else {
+      $('body').css('overflow', 'scroll')
+      _this._container.css('overflow', 'hidden').css('height', 'auto')
+      $(document).one('scroll', _this.hiddenUrl)
+      _this._container.off('scroll', _this.hiddenUrl)
+    }
+  },
+
+
+  _bindEvent: function () {
+    _this._container.on('scroll', _this._smartScrollTop)
     _this._container.on('wheel', function  (e) {
       _this.isUp = e.originalEvent.wheelDelta > 0;
     })
@@ -22,8 +56,6 @@ var scrollSection = {
       _this.isUp = currentY > _this.lastY;
       _this.lastY = currentY;
     })
-
-    _this._calcSection();
   },
 
   _scrollTopTargets: {},
@@ -55,7 +87,7 @@ var scrollSection = {
       scrollTop: _this._scrollTopTargets[_this._scrollTopElement.attr('class')]
     }, 600);
     setTimeout(function () {
-      // _this._container.on('scroll', _this._scrollToSection)
+      // _this._container.on('scroll', _this._smartScrollTop)
       _this._isScrollTop = false;
     }, 650);
     _this._scrollTopElement = undefined;
@@ -70,7 +102,7 @@ var scrollSection = {
       scrollTop: _this._scrollBottomTargets[_this._scrollTopElement.attr('class')]
     }, 600);
     setTimeout(function () {
-      // _this._container.on('scroll', _this._scrollToSection)
+      // _this._container.on('scroll', _this._smartScrollTop)
       _this._isScrollTop = false;
     }, 650);
     _this._scrollTopElement = undefined;
@@ -113,20 +145,17 @@ var scrollSection = {
 
 
   //main
-  _scrollToSection: function (e) {
-
+  _smartScrollTop: function (e) {
     _this._sections.each(function () {
       if (_this._isScrollTop) return;
       console.log('currElement: ', $(this));
 
-      // if (_this.isUp && _this._inViewInnerTop($(this)) ) {
       if (_this.isUp && _this._inViewInnerTop($(this)) ||
          !_this.isUp && _this._isViewOuterBottom($(this)) ) {
         _this._scrollTopElement = $(this);
         _this._isScrollTop = true;
         _this._backBottom();
       }
-      // else if (!_this.isUp && _this._isViewInnerBottom($(this)) ) {
       else if (!_this.isUp && _this._isViewInnerBottom($(this)) ||
                 _this.isUp && _this._inViewOuterTop($(this)) ) {
         _this._scrollTopElement = $(this);
