@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>jQuery test</title>
+        <style media="screen">
+            .number-area {
+                border: solid 1px black;
+                width: 270px;
+                font-size: 0;
+            }
+
+            [type=text] {
+                height: 28px;
+                width: 28px;
+                border: 1px solid black;
+                text-align: center;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="number-area"></div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+
+      Array.prototype.remove = function (number){
+        if (typeof(number) == 'object' && number.constructor.toString().includes('Array')) {
+          number.forEach(x => kernel.remove(x));
+        }
+
+        if (typeof(number) == 'string'){
+          if (this.indexOf(number) == -1) {
+            return this.slice();
+          }
+          else {
+            return this.splice(this.indexOf(number), 1);
+          }
+        }
+      }
+
+      function kernelArray() {
+        return ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+      }
+
+      function k(i, j) {
+        return parseInt(i/3)*3 + parseInt(j/3);
+      }
+
+      function toArray($obj) {
+        let a = [];
+        $obj.each(function(){
+          a.push($(this).val());
+        });
+        return a.slice();
+      }
+
+      for(let i = 0; i < 9; ++i) {
+        for(let j = 0; j < 9; ++j) {
+          const number_box = document.createElement('input');
+          const $nbox = $(number_box);
+          $nbox.attr('data-i', i);
+          $nbox.attr('data-j', j);
+          $nbox.attr('data-k', k(i, j));
+          // console.log(i, j, i%3, parseInt(i/3), j%3, parseInt(j/3));
+          // console.log(parseInt(i/3)*3 + parseInt(j/3));
+          $nbox.attr('type', 'text');
+          $nbox.attr('value', '0');
+          $('.number-area').append($nbox);
+        }
+      }
+
+      function setValue(n1, n2, value) {
+        $(`[data-i="${n1}"][data-j="${n2}"][data-k="${k(n1, n2)}"]`).css('background-color', '#c8c8c8').val(value);
+      }
+
+      function remove(i, j) {
+        value = $(`[data-i="${i}"][data-j="${j}"][data-k="${k(i, j)}"]`).val();
+        if (value != 0) return;
+
+        curr = toArray($(`[data-i=${i}]`));
+        kernel.remove(curr);
+        curr = toArray($(`[data-j=${j}]`));
+        kernel.remove(curr);
+        curr = toArray($(`[data-k=${k(i, j)}]`));
+        kernel.remove(curr);
+
+        if (kernel.length == 1) {
+          setValue(i, j, kernel[0]);
+        }
+      }
+
+      function Go(){
+        for(let i = 0; i < 9; ++i) {
+          for(let j = 0; j < 9; ++j) {
+            kernel = kernelArray();
+            remove(i, j);
+          }
+        }
+      }
+
+      setValue(0, 0, 7);
+      setValue(0, 4, 6);
+      setValue(0, 8, 5);
+      setValue(1, 0, 2);
+      setValue(1, 1, 1);
+      setValue(1, 7, 3);
+      setValue(1, 8, 6);
+      setValue(2, 0, 3);
+      setValue(2, 2, 4);
+      setValue(2, 6, 8);
+      setValue(2, 8, 2);
+      // ------------
+      setValue(3, 3, 3);
+      setValue(3, 5, 5);
+      setValue(4, 4, 2);
+      setValue(5, 0, 9);
+      setValue(5, 1, 5);
+      setValue(5, 2, 6);
+      setValue(5, 6, 3);
+      setValue(5, 7, 2);
+      setValue(5, 8, 4);
+      // ------------
+      setValue(6, 3, 8);
+      setValue(6, 4, 7);
+      setValue(6, 5, 9);
+      setValue(7, 3, 1);
+      setValue(7, 5, 2);
+      setValue(8, 0, 8);
+      setValue(8, 2, 3);
+      setValue(8, 4, 4);
+      setValue(8, 6, 2);
+      setValue(8, 8, 9);
+
+    </script>
+    </body>
+</html>
