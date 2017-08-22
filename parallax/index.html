@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>滾動視差的練習</title>
+    <style media="screen">
+      body {
+        overflow-y: hidden;
+        margin: 0;
+      }
+
+      .aims {
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        width: 500px;
+        /*height: 600px;*/
+      }
+
+      .aims div {
+        flex: 1 0 48px;
+        width: 48px;
+        height: 48px;
+      }
+
+      .parallax__layer--base div {
+        border: 1px black solid;
+      }
+
+      .parallax__layer--back div {
+        border: 1px blue solid;
+      }
+
+      .parallax {
+        /*scroll-behavior: auto;*/
+        /*scroll-behavior: unset;*/
+        perspective: 1px;
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      .parallax__group {
+        position: relative;
+        height: 100vh;
+        transform-style: preserve-3d;
+        /*border: 1px solid red;*/
+      }
+
+      .parallax__layer--base {
+        transform: translateZ(0);
+      }
+
+      .parallax__layer--back {
+        transform: translateZ(-1px) scale(2);
+      }
+
+      .parallax__layer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+
+    </style>
+
+  </head>
+  <body>
+    <div class="parallax">
+      <div class="parallax__group">
+        <div class="parallax__layer parallax__layer--back">
+          <div class="aims"></div>
+        </div>
+      </div>
+      <div class="parallax__group">
+        <div class="parallax__layer parallax__layer--base">
+          <div class="aims"></div>
+        </div>
+      </div>
+      <div class="parallax__group">
+        <div class="parallax__layer parallax__layer--back">
+          <div class="aims"></div>
+        </div>
+      </div>
+      <div class="parallax__group">
+        <div class="parallax__layer parallax__layer--base">
+          <div class="aims"></div>
+        </div>
+      </div>
+      <div class="parallax__group">
+        <div class="parallax__layer parallax__layer--back">
+          <div class="aims"></div>
+        </div>
+      </div>
+      <div class="parallax__group">
+        <div class="parallax__layer parallax__layer--base">
+          <div class="aims"></div>
+        </div>
+      </div>
+    </div>
+    <!-- <script type="text/javascript" src="./index.js"></script> -->
+    <script type="text/javascript">
+    const aims = document.querySelectorAll('.aims');
+
+    aims.forEach(aim => {
+      const totalAims = 60;
+      for(var i = 0; i < totalAims; i++) {
+        const box = document.createElement('div');
+        aim.appendChild(box);
+      }
+    });
+
+    </script>
+  </body>
+</html>
