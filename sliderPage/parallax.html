@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+    <title>滑動頁面練習(手刻版)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style media="screen">
+      body {
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        margin: 0;
+        /*background-color: #c0c0c0;*/
+      }
+      /*aims*/
+
+      i.fa {
+        font-size: 24px;
+      }
+
+      .slider:not(:first-child) i.fa {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+      }
+
+      .slider:first-child i.fa {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+      }
+
+      .slider1 .aims,
+      .slider1 .aims div {
+        border: 1px solid blue;
+      }
+
+      .slider2 .aims,
+      .slider2 .aims div {
+        border: 1px solid red;
+      }
+
+      .slider3 .aims,
+      .slider3 .aims div {
+        border: 1px solid green;
+      }
+
+      .aims {
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        width: 500px;
+        /*border: 1px blue solid;*/
+      }
+
+      .aims div {
+        flex: 1 0 48px;
+        height: 48px;
+        /*border: 1px blue solid;*/
+      }
+      /*radios*/
+
+      .radios {
+        position: fixed;
+        bottom: 50vh;
+        left: 0;
+        background-color: gray;
+        padding-right: 5px;
+
+        transition: left 0.5s;
+      }
+
+      .hidden.radios {
+        left: -100%;
+      }
+      /*slider*/
+
+      .slider2,
+      .slider3 {
+        background-color: rgba(180, 180, 180, 0.9);
+      }
+
+      .slider {
+
+        width: 100vw;
+        height: 100vh;
+        overflow-y: scroll;
+        overflow-x: scroll;
+
+        position: absolute;
+        top: 0;
+
+        transition: left 1s cubic-bezier(0.4, 1.1, 0.83, 1.02);
+      }
+      /*change watch*/
+
+      .watch3 .slider1,
+      .watch2 .slider1 {
+        overflow-y: hidden;
+      }
+
+      .watch3 .slider2 {
+        display: none;
+      }
+
+      .watch2 .slider1,
+      .watch3 .slider1,
+      .watch3 .slider2 {
+        left: -50vw;
+      }
+
+      .watch1 .slider1,
+      .watch2 .slider2,
+      .watch3 .slider3 {
+        /*watching*/
+        left: 0;
+      }
+
+      .watch1 .slider2,
+      .watch2 .slider3,
+      .watch1 .slider3 {
+        left: 100vw;
+      }
+
+      .radios>div:first-child {
+        display: none;
+      }
+
+      .hidden_scroll {
+        overflow-y: hidden;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="watch1">
+      <div class="slider slider1">
+        <div class="aims"></div>
+        <i class="fa fa-bars"></i>
+      </div>
+      <div class="slider slider2">
+        <div class="aims"></div>
+        <i class="fa fa-close"></i>
+
+      </div>
+      <div class="slider slider3">
+        <div class="aims"></div>
+        <i class="fa fa-close"></i>
+      </div>
+
+      <div class="hidden radios">
+        <div>
+          <input id="watch1" name="curr_watch" type="radio" checked/><label for="watch1">Slider1</label>
+        </div>
+        <div>
+          <input id="watch2" name="curr_watch" type="radio" /><label for="watch2">Slider2</label>
+        </div>
+        <div>
+          <input id="watch3" name="curr_watch" type="radio" /><label for="watch3">Slider3</label>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      const aims = document.querySelectorAll('.aims');
+      aims.forEach(aim => {
+        const totalAims = 126;
+        for (var i = 0; i < totalAims; i++) {
+          const box = document.createElement('div');
+          aim.appendChild(box);
+        }
+      });
+
+
+      function changePage() {
+        console.log(this);
+        const sliderPage = document.querySelector('body>div');
+        //remove all class which include 'watch'
+        radios.forEach(radio => {
+          sliderPage.classList.remove(radio.id);
+          console.log(radio.id);
+        });
+        //add target class
+        sliderPage.classList.add(this.id);
+        menu.classList.add('hidden');
+      }
+
+      const radios = document.querySelectorAll('input[type=radio]');
+      radios.forEach(radio => {
+        radio.addEventListener('click', changePage);
+      });
+
+      function backMainPage() {
+        console.log(this);
+        const sliderPage = document.querySelector('body>div');
+        radios.forEach(radio => {
+          sliderPage.classList.remove(radio.id);
+          console.log(radio.id);
+        });
+        sliderPage.classList.add('watch1');
+        menu.classList.add('hidden');
+      }
+
+
+      const closePages = document.querySelectorAll('.fa-close');
+      closePages.forEach(close => close.addEventListener('click', backMainPage));
+
+      const hamburger = document.querySelector('.fa-bars');
+      const menu = document.querySelector('.radios');
+      hamburger.addEventListener('click', function () {
+        menu.classList.remove('hidden');
+      });
+
+    </script>
+  </body>
+</html>

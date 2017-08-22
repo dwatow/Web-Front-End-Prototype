@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>滑動頁面區</title>
+    <style media="screen">
+      .pages {
+        /*border: 5px solid red;*/
+        width: 100vw;
+        /*height: 50vh;*/
+      }
+
+      .page {
+        display: inline-block;
+        width: 48vw;
+        height: 48vh;
+        transition: all .7s;
+        border: 1px solid blue;
+      }
+
+      .main_page {
+        background-color: #fff;
+        text-align: center;
+        font-size: 42px;
+      }
+
+      .fun_page {
+        background-color: rgba(255, 0, 0, 0.5);
+        text-align: center;
+        font-size: 42px;
+      }
+
+      .hidden_box {
+        display: none;
+      }
+
+      .menu {
+        position: fixed;
+        top: 7rem;
+        left: 1rem;
+        transition: all .7s;
+        font-size: 24px;
+      }
+
+      #slide_page_checkbox:checked~.menu {
+        transform: rotate(-180deg);
+      }
+
+      #slide_page_checkbox:checked~.fun_page {
+        transform: translateX(-50vw);
+      }
+
+      #slide_page_checkbox:checked~.main_page {
+        transform: translateX(-25vw);
+      }
+
+    </style>
+
+  </head>
+  <body>
+    <input id="slide_page_checkbox" type="checkbox" class="hidden_box">
+    <div class="page main_page">
+      main_page
+    </div>
+    <div class="page fun_page">
+      fun_page
+    </div>
+    <label for="slide_page_checkbox" class="menu">＜</label>
+
+  </body>
+</html>
