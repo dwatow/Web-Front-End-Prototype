@@ -7,7 +7,6 @@
         <title>Document</title>
         <style media="screen">
             /*label,*/
-
             select,
             option,
             input {
@@ -32,7 +31,13 @@
     </head>
     <body>
         <label for="dataid">資料編號</label>
-        <select name="dataid" id="dataid">
+            <select name="dataid" id="dataid">
+                <option value="W-C0034-001">颱風消息與警報-颱風警報</option>
+                <option value="W-C0034-002">颱風消息與警報-颱風消息</option>
+                <option value="W-C0034-003">颱風消息與警報-颱風侵襲機率</option>
+                <option value="W-C0034-004">颱風消息與警報-颱風路徑</option>
+                <option value="F-C0034-005">颱風期間各警戒地區風力預測</option>
+                <option value="F-C0034-006">颱風期間各地區24小時雨量預測</option>
                 <option value="F-D0047-001">宜蘭縣未來2天天氣預報</option>
                 <option value="F-D0047-005">桃園市未來2天天氣預報</option>
                 <option value="F-D0047-009">新竹縣未來2天天氣預報</option>
@@ -56,9 +61,37 @@
                 <option value="F-D0047-081">連江縣未來2天天氣預報</option>
                 <option value="F-D0047-085">金門縣未來2天天氣預報</option>
                 <option value="F-D0047-089">台灣未來2天天氣預報</option>
+                <option value="W-C0033-001">天氣特報-各別縣市地區目前之天氣警特報情形</option>
+                <option value="W-C0033-002">天氣特報-各別天氣警特報之內容及所影響之區域</option>
+                <option value="W-C0033-003">天氣特報-豪大雨特報</option>
             </select>
         <label for="authorizationkey">授權碼</label><input type="text" id="authorizationkey" value="">
         <button onclick="send()">click</button>
+        <p><a href="http://typhoon.ws/learn/reference/stop_working_rule">政府發布的停班停課</a></p>
+        <ul>
+            <li>
+                風力
+                <ul>
+                    <li>颱風暴風半徑於四小時內可能經過的地區</li>
+                    <li>平均風力達到七級風</li>
+                    <li>陣風達到十級風</li>
+                </ul>
+            </li>
+            <li>
+                雨量
+                <ul>
+                    <li><a href="http://law.moj.gov.tw/Law/law_getfile.ashx?FileId=0000124126" target="_blank">各縣市「未來24小時累積雨量預測/毫米」標準表</a></li>
+                    <li>以交通部中央氣象局發布之各該地區24小時雨量預測值，作為決定及通報依據。</li>
+                    <li>「實際觀測」雨量值係以交通部中央氣象局於各縣市行政區所設雨量站實際測得24小時累積雨量值，作為決定及通報依據。</li>
+                </ul>
+            </li>
+            <li>
+                土石流
+                <ul>
+                    <li><a href="http://246.swcb.gov.tw/debrisInfo/Debris.aspx" target="_blank">各縣市「地區降雨量達到土石流警戒基準值」標準表</a></li>
+                </ul>
+            </li>
+        </ul>
         <pre id="content"></pre>
         <script type="text/javascript">
         //'CWB-81E3A4E0-7B70-47EF-B53C-148079419530';
