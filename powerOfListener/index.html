@@ -65,7 +65,7 @@
                 <option value="W-C0033-002">天氣特報-各別天氣警特報之內容及所影響之區域</option>
                 <option value="W-C0033-003">天氣特報-豪大雨特報</option>
             </select>
-        <label for="authorizationkey">授權碼</label><input type="text" id="authorizationkey" value="">
+        <!-- <label for="authorizationkey">授權碼</label><input type="text" id="authorizationkey" value=""> -->
         <button onclick="send()">click</button>
         <p><a href="http://typhoon.ws/learn/reference/stop_working_rule">政府發布的停班停課</a></p>
         <ul>
@@ -102,6 +102,9 @@
         <script type="text/javascript">
         //'CWB-81E3A4E0-7B70-47EF-B53C-148079419530';
 
+        function isHaveXml(tagName) {
+            return this.querySelector(tagName)
+        }
 
         function getXmlContent (tagName) {
             return this.querySelector(tagName).textContent.trim();
@@ -111,79 +114,125 @@
             return [...this.querySelectorAll(nodeName)];
         }
 
+        function getSubXmls (nodeTagName, nodeName) {
+            return this.filter(function (subNode) {
+                subNode.compare = isNodeEq
+                return subNode.compare(nodeTagName, nodeName)
+            })
+        }
+
+        function arrXmlToJson (option) {
+            return this.map (function (item) {
+                item.getText = getXmlContent
+                let obj = {}
+                for (key in option) {
+                    obj[key] = item.getText(option[key])
+                }
+                return obj
+            })
+        }
+
         function isNodeEq (tagName, eqValue) {
             this.getText = getXmlContent;
             return this.getText(tagName) == eqValue;
         }
 
+        function getApiTitle(titleTagName) {
+            this.getText = getXmlContent
+            return this.getText(titleTagName)
+        }
 
+        function getTwoDayWind(xml) {
+            let dataset = {}
+            dataset.title = xml.getText('datasetDescription');
+
+            dataset.updatetime = xml.getText('update');
+            const localtions = xml.getList('location');
+            dataset.localtions = localtions.map(function (location) {
+                location.getText = getXmlContent;
+
+                let weathers = [...location.querySelectorAll('weatherElement')];
+                weathers = weathers.filter(function (weather) {
+                    weather.compare = isNodeEq;
+                    return weather.compare('elementName', 'Wind');
+                })
+
+                weathers = weathers.map(function (wind) {
+                    wind.getList = getXmls;
+                    let times = wind.getList('time');
+
+                    times = times.map(function (time) {
+                        time.getText = getXmlContent;
+
+                        time.getList = getXmls
+                        let params = time.getList('parameter')
+
+                        params.getSubXmls = getSubXmls
+                        let speeds = params.getSubXmls('parameterName', '風速')
+                        speeds.toJson = arrXmlToJson
+                        return {
+                            time: time.getText('dataTime'),
+                            speed: speeds.toJson({
+                                name: 'parameterName',
+                                value: 'parameterValue'
+                            })[0].value
+                        }
+                    })
+
+                    return times
+                })
+
+                return {
+                    name: location.getText('locationName'),
+                    winds: weathers[0]
+                }
+            })
+            return JSON.stringify(dataset)
+        }
+
+        var xmldata = '';
+        // function
         function send () {
-            // const dataid = document.querySelector('#dataid').value;
+            setTimeout(function () {
+                document.querySelector("#content").innerHTML = '處理中...';
+            }, 0)
+            const dataid = document.querySelector('#dataid').value;
             // const authorizationkey = document.querySelector('#authorizationkey').value;
             // const url = `http://opendata.cwb.gov.tw/opendataapi?dataid=${dataid}&authorizationkey=${authorizationkey}`
             // const url = `./data.xml`
-            const url = 'https://cors-anywhere.herokuapp.com/opendata.cwb.gov.tw/opendataapi?dataid=F-D0047-089&authorizationkey=CWB-81E3A4E0-7B70-47EF-B53C-148079419530';
+            const url = `https://cors-anywhere.herokuapp.com/opendata.cwb.gov.tw/opendataapi?dataid=${dataid}&authorizationkey=CWB-81E3A4E0-7B70-47EF-B53C-148079419530`;
+            console.log('url: ', url);
 
             var dataset = {}
-            function responsed (data) {
-                data.getText = getXmlContent;
-                data.getList = getXmls;
+            function responsed (xml) {
+                xmldata = xml
+                console.log('xml: ', xml)
+                // console.log(xml.toString().match('2天'));
 
-                dataset.title = data.getText('datasetDescription');
-                dataset.updatetime = data.getText('update');
-                const localtions = data.getList('location');
-                dataset.localtions = localtions.map(function (location) {
-                    location.getText = getXmlContent;
+                xml.getText = getXmlContent
+                xml.getList = getXmls
+                xml.isHaveXml = isHaveXml
 
-                    let weathers = [...location.querySelectorAll('weatherElement')];
-                    weathers = weathers.filter(function (weather) {
-                        weather.compare = isNodeEq;
-                        return weather.compare('elementName', 'Wind');
-                    })
+                if (typeof xml !== 'object') {
+                    document.querySelector("#content").innerHTML = xml
+                    return
+                }
 
-                    weathers = weathers.map(function (wind) {
-                        wind.getList = getXmls;
-                        let times = wind.getList('time');
+                // console.log(dataset.title);
+                if (xml.isHaveXml('datasetDescription')) {
+                    dataset.title = xml.getText('datasetDescription');
+                    document.querySelector("#content").innerHTML = getTwoDayWind(xml)
+                }
+                else {//if (xml.isHaveXml('BulletinName')) {
+                    document.querySelector("#content").innerHTML = xml.documentElement.innerHTML
+                }
 
-                        times = times.map(function (time) {
-                            time.getText = getXmlContent;
-                            time.getList = getXmls;
-
-                            let params = time.getList('parameter');
-                            let speeds = params.filter(function (param) {
-                                param.compare = isNodeEq;
-                                return param.compare('parameterName', '風速');
-                            })
-
-                            speeds = speeds.map (function (speed) {
-                                speed.getText = getXmlContent;
-                                return {
-                                    name: speed.getText('parameterName'),
-                                    value: speed.getText('parameterValue')
-                                }
-                            })
-
-                            return {
-                                time: time.getText('dataTime'),
-                                speed: speeds[0].value
-                            }
-                        })
-
-                        return times
-                    })
-
-                    return {
-                        name: location.getText('locationName'),
-                        winds: weathers[0]
-                    }
-                })
-                console.log(dataset);
-                document.querySelector("#content").innerHTML = JSON.stringify(dataset);
+                // console.log(dataset)
             }
 
             $.ajax({
                 url: url,
-                async: false,
+                async: true,
                 success: responsed
             });
 
