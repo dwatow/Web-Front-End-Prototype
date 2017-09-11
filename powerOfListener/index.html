@@ -38,7 +38,7 @@
                 <option value="W-C0034-004">颱風消息與警報-颱風路徑</option>
                 <option value="F-C0034-005">颱風期間各警戒地區風力預測</option>
                 <option value="F-C0034-006">颱風期間各地區24小時雨量預測</option>
-                <option value="F-D0047-001">宜蘭縣未來2天天氣預報</option>
+                <!-- <option value="F-D0047-001">宜蘭縣未來2天天氣預報</option>
                 <option value="F-D0047-005">桃園市未來2天天氣預報</option>
                 <option value="F-D0047-009">新竹縣未來2天天氣預報</option>
                 <option value="F-D0047-013">苗栗縣未來2天天氣預報</option>
@@ -59,13 +59,13 @@
                 <option value="F-D0047-073">臺中市未來2天天氣預報</option>
                 <option value="F-D0047-077">臺南市未來2天天氣預報</option>
                 <option value="F-D0047-081">連江縣未來2天天氣預報</option>
-                <option value="F-D0047-085">金門縣未來2天天氣預報</option>
+                <option value="F-D0047-085">金門縣未來2天天氣預報</option> -->
                 <option value="F-D0047-089">台灣未來2天天氣預報</option>
                 <option value="W-C0033-001">天氣特報-各別縣市地區目前之天氣警特報情形</option>
                 <option value="W-C0033-002">天氣特報-各別天氣警特報之內容及所影響之區域</option>
                 <option value="W-C0033-003">天氣特報-豪大雨特報</option>
             </select>
-        <label for="authorizationkey">授權碼</label><input type="text" id="authorizationkey" value="">
+        <!-- <label for="authorizationkey">授權碼</label><input type="text" id="authorizationkey" value=""> -->
         <button onclick="send()">click</button>
         <p><a href="http://typhoon.ws/learn/reference/stop_working_rule">政府發布的停班停課</a></p>
         <ul>
@@ -93,26 +93,168 @@
             </li>
         </ul>
         <pre id="content"></pre>
+        <script
+          src="https://code.jquery.com/jquery-3.2.1.js"
+          integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+          crossorigin="anonymous"></script>
+
+
         <script type="text/javascript">
         //'CWB-81E3A4E0-7B70-47EF-B53C-148079419530';
 
-
-        function send () {
-            const dataid = document.querySelector('#dataid').value;
-            const authorizationkey = document.querySelector('#authorizationkey').value;
-
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    console.log(this.responseText);
-                    document.querySelector("#content").innerHTML = this.responseText.toString();
-                }
-            };
-
-            const url = `https://opendata.cwb.gov.tw/opendataapi?dataid=${dataid}&authorizationkey=${authorizationkey}`
-            xhttp.open("GET", url, true);
-            xhttp.send();
+        function isHaveXml(tagName) {
+            return this.querySelector(tagName)
         }
+
+        function getXmlContent (tagName) {
+            return this.querySelector(tagName).textContent.trim();
+        }
+
+        function getXmls(nodeName) {
+            return [...this.querySelectorAll(nodeName)];
+        }
+
+        function getSubXmls (nodeTagName, nodeName) {
+            return this.filter(function (subNode) {
+                subNode.compare = isNodeEq
+                return subNode.compare(nodeTagName, nodeName)
+            })
+        }
+
+        function arrXmlToJson (option) {
+            return this.map (function (item) {
+                item.getText = getXmlContent
+                let obj = {}
+                for (key in option) {
+                    obj[key] = item.getText(option[key])
+                }
+                return obj
+            })
+        }
+
+        function isNodeEq (tagName, eqValue) {
+            this.getText = getXmlContent;
+            return this.getText(tagName) == eqValue;
+        }
+
+        function getApiTitle(titleTagName) {
+            this.getText = getXmlContent
+            return this.getText(titleTagName)
+        }
+
+        function getTwoDayWind(xml) {
+            let dataset = {}
+            dataset.title = xml.getText('datasetDescription');
+
+            dataset.updatetime = xml.getText('update');
+            const localtions = xml.getList('location');
+            dataset.localtions = localtions.map(function (location) {
+                location.getText = getXmlContent;
+
+                let weathers = [...location.querySelectorAll('weatherElement')];
+                weathers = weathers.filter(function (weather) {
+                    weather.compare = isNodeEq;
+                    return weather.compare('elementName', 'Wind');
+                })
+
+                weathers = weathers.map(function (wind) {
+                    wind.getList = getXmls;
+                    let times = wind.getList('time');
+
+                    times = times.map(function (time) {
+                        time.getText = getXmlContent;
+
+                        time.getList = getXmls
+                        let params = time.getList('parameter')
+
+                        params.getSubXmls = getSubXmls
+                        let speeds = params.getSubXmls('parameterName', '風速')
+                        speeds.toJson = arrXmlToJson
+                        return {
+                            time: time.getText('dataTime'),
+                            speed: speeds.toJson({
+                                name: 'parameterName',
+                                value: 'parameterValue'
+                            })[0].value
+                        }
+                    })
+
+                    return times
+                })
+
+                return {
+                    name: location.getText('locationName'),
+                    winds: weathers[0]
+                }
+            })
+            return JSON.stringify(dataset)
+        }
+
+        var xmldata = '';
+        // function
+        function send () {
+            setTimeout(function () {
+                document.querySelector("#content").innerHTML = '處理中...';
+            }, 0)
+            const dataid = document.querySelector('#dataid').value;
+            // const authorizationkey = document.querySelector('#authorizationkey').value;
+            // const url = `http://opendata.cwb.gov.tw/opendataapi?dataid=${dataid}&authorizationkey=${authorizationkey}`
+            // const url = `./data.xml`
+            const url = `https://cors-anywhere.herokuapp.com/opendata.cwb.gov.tw/opendataapi?dataid=${dataid}&authorizationkey=CWB-81E3A4E0-7B70-47EF-B53C-148079419530`;
+            console.log('url: ', url);
+
+            var dataset = {}
+            function responsed (xml) {
+                xmldata = xml
+                console.log('xml: ', xml)
+                // console.log(xml.toString().match('2天'));
+
+                xml.getText = getXmlContent
+                xml.getList = getXmls
+                xml.isHaveXml = isHaveXml
+
+                if (typeof xml !== 'object') {
+                    document.querySelector("#content").innerHTML = xml
+                    return
+                }
+
+                // console.log(dataset.title);
+                if (xml.isHaveXml('datasetDescription')) {
+                    dataset.title = xml.getText('datasetDescription');
+                    document.querySelector("#content").innerHTML = getTwoDayWind(xml)
+                }
+                else {//if (xml.isHaveXml('BulletinName')) {
+                    document.querySelector("#content").innerHTML = xml.documentElement.innerHTML
+                }
+
+                // console.log(dataset)
+            }
+
+            $.ajax({
+                url: url,
+                async: true,
+                success: responsed
+            });
+
+
+
+            // var xhttp = new XMLHttpRequest();
+            // xhttp.onreadystatechange = function() {
+            //     // console.log(this);
+            //     if (this.readyState == 4 && this.status == 200) {
+            //         // console.log(this.responseText);
+            //         responsed(this.responseText);
+            //     }
+            // };
+            //
+            // xhttp.open("GET", url, false);
+            // xhttp.send();
+            // if (xhttp.readyState == 4 && xhttp.status == 200) {
+            //     console.log(xhttp.responseText);
+            //     document.querySelector("#content").innerHTML = xhttp.responseText.toString();
+            // }
+        }
+
         </script>
     </body>
 </html>
