@@ -35,10 +35,13 @@
                 position: fixed;
                 top: 0;
                 left: 0;
-                /* 48px */
                 height: 100vh;
                 width: 1px;
                 background-color: #f00;
+            }
+
+            .currDay {
+                transition: .5s
             }
 
             .count {
@@ -82,21 +85,31 @@
                             return object;
                         }, {})).length;
 
+                        return {
+                            name: item.name,
+                            title: item.title,
+                            postsCount: postsCounter,
+                            postaPercent: (postsCounter/30*100).toFixed(2)
+                        };
+                    })
+                    .sort (function (a, b) {
+                        return a.postsCount - b.postsCount;
+                    })
+                    .map (function (item) {
                         const posts = document.createElement("div");
-                        console.log(postsCounter, diffDayCounter);
-                        if (postsCounter <= diffDayCounter) posts.classList.add("danger");
-                        posts.style.width = `${12 * postsCounter }px`
+                        console.log(item.postsCount, diffDayCounter);
+                        if (item.postsCount <= diffDayCounter) posts.classList.add("danger");
+                        posts.style.width = `${12 * item.postsCount }px`
 
                         const totalposts = document.createElement("div");
                         totalposts.classList.add("posts");
                         totalposts.style.width = `${12 * 30 }px`
                         totalposts.appendChild(posts)
-
                         return `<li>
                             ${totalposts.outerHTML}
                             <span class="name">${item.name}</span>
                             <span class="title">${item.title}</span>
-                            <span class="count">${postsCounter}篇, ${(postsCounter/30*100).toFixed(2)}%</span>
+                            <span class="count">${item.postsCount}篇, ${item.postaPercent}%</span>
                         </li>`;
                     })
 
