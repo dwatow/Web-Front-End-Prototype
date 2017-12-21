@@ -41,21 +41,49 @@
                 background-color: #f00;
             }
 
+            .count {
+                color: red;
+            }
+
+            .danger {
+                background-color: #ffc1c1!important;
+            }
+
         </style>
     </head>
     <body>
+        <div class="percentDay"></div>
         <div class="currDay"></div>
         <ol id="ironmans">Loading...</ol>
         <script type="text/javascript">
+
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
+                    const ironmans = document.querySelector('#ironmans');
+                    const currDay = document.querySelector(".currDay");
+                    const percentDay = document.querySelector('.percentDay');
+
+
                     const json = JSON.parse(this.responseText);
+                    console.log(json);
+
+                    const diffDayCounter = getDayCount()
+                    currDay.style.left = `${48 + 12 * diffDayCounter}px`;
+
+                    percentDay.textContent = `第${diffDayCounter}天`
+
 
                     const htmlelements = json.map(function (item) {
+                        const postsCounter = Object.keys(item.postList.reduce (function (object, post) {
+                            object[post.date] = true;
+                            return object;
+                        }, {})).length;
+
                         const posts = document.createElement("div");
-                        // posts.classList.add("posts");
-                        posts.style.width = `${12 * item.posts }px`
+                        console.log(postsCounter, diffDayCounter);
+                        if (postsCounter <= diffDayCounter) posts.classList.add("danger");
+                        posts.style.width = `${12 * postsCounter }px`
 
                         const totalposts = document.createElement("div");
                         totalposts.classList.add("posts");
@@ -65,24 +93,25 @@
                         return `<li>
                             ${totalposts.outerHTML}
                             <span class="name">${item.name}</span>
-                            <span class="name">${item.title}</span>
+                            <span class="title">${item.title}</span>
+                            <span class="count">${postsCounter}, ${(postsCounter/30*100).toFixed(2)}%</span>
                         </li>`;
                     })
 
-                    const ironmans = document.querySelector('#ironmans');
                     ironmans.innerHTML = htmlelements.join("");
 
-                    const diffms = new Date() - new Date("2017-12-20");
-                    const time = new Date(diffms)
-                    const diffTime = time.getDay();
-                    const currDay = document.querySelector(".currDay");
-                    currDay.style.left = "5px"
-                    currDay.style.left = `${48 + 12 + diffTime}px`;
                }
             };
 
             xhttp.open("GET", "https://cors-anywhere.herokuapp.com/http://ironmans.goodideas-studio.com/", true);
             xhttp.send();
+
+
+            function getDayCount() {
+                const diffms = new Date() - new Date("2017-12-20");
+                const diffDate = new Date(diffms)
+                return diffDate.getDate() -1;
+            }
         </script>
     </body>
 </html>
