@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Iron Mans 30 Day in Goodidea Studio</title>
+        <style media="screen">
+            li {
+                position: relative;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+            }
+
+            .posts > div, .posts {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+                height: 12px;
+                z-index: -1;
+            }
+
+            .posts > div {
+                background-color: #dedede;
+            }
+
+            .posts {
+                box-shadow: 0 0 0 1px #fff, 0 0 0 2px #ebebeb;
+            }
+
+            .currDay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                /* 48px */
+                height: 100vh;
+                width: 1px;
+                background-color: #f00;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="currDay"></div>
+        <ol id="ironmans"></ol>
+        <script type="text/javascript">
+            var debug;
+            fetch('http://ironmans.goodideas-studio.com/').then(function(response) {
+                return response.json();
+            }).then(function (json) {
+                console.log(json);
+                var htmlelements = json.map(function (item) {
+                    const posts = document.createElement("div");
+                    // posts.classList.add("posts");
+                    posts.style.width = `${12 * item.posts }px`
+
+                    const totalposts = document.createElement("div");
+                    totalposts.classList.add("posts");
+                    totalposts.style.width = `${12 * 30 }px`
+                    totalposts.appendChild(posts)
+
+                    return `<li>
+                        ${totalposts.outerHTML}
+                        <span class="name">${item.name}</span>
+                        <span class="name">${item.title}</span>
+                    </li>`;
+                })
+
+                const ironmans = document.querySelector('#ironmans');
+                ironmans.innerHTML = htmlelements.join("");
+
+                const diffms = new Date() - new Date("2017-12-20");
+                const time = new Date(diffms)
+                const diffTime = time.getDay();
+                const currDay = document.querySelector(".currDay");
+                currDay.style.left = "5px"
+                currDay.style.left = `${48 + 12 + diffTime}px`;
+            });
+        </script>
+    </body>
+</html>
