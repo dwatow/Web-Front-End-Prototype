@@ -43,6 +43,8 @@
 
             .count {
                 color: red;
+                vertical-align: sub;
+                font-size: .5em;
             }
 
             .danger {
@@ -94,7 +96,7 @@
                             ${totalposts.outerHTML}
                             <span class="name">${item.name}</span>
                             <span class="title">${item.title}</span>
-                            <span class="count">${postsCounter}, ${(postsCounter/30*100).toFixed(2)}%</span>
+                            <span class="count">${postsCounter}篇, ${(postsCounter/30*100).toFixed(2)}%</span>
                         </li>`;
                     })
 
