@@ -13,7 +13,8 @@
                 margin: auto;
             }
 
-            .posts > div, .posts {
+            .posts>div,
+            .posts {
                 position: absolute;
                 top: 0;
                 bottom: 0;
@@ -22,7 +23,7 @@
                 z-index: -1;
             }
 
-            .posts > div {
+            .posts>div {
                 background-color: #dedede;
             }
 
@@ -39,44 +40,49 @@
                 width: 1px;
                 background-color: #f00;
             }
+
         </style>
     </head>
     <body>
         <div class="currDay"></div>
         <ol id="ironmans">Loading...</ol>
         <script type="text/javascript">
-            var debug;
-            fetch('http://ironmans.goodideas-studio.com/').then(function(response) {
-                return response.json();
-            }).then(function (json) {
-                console.log(json);
-                var htmlelements = json.map(function (item) {
-                    const posts = document.createElement("div");
-                    // posts.classList.add("posts");
-                    posts.style.width = `${12 * item.posts }px`
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    const json = JSON.parse(this.responseText);
 
-                    const totalposts = document.createElement("div");
-                    totalposts.classList.add("posts");
-                    totalposts.style.width = `${12 * 30 }px`
-                    totalposts.appendChild(posts)
+                    const htmlelements = json.map(function (item) {
+                        const posts = document.createElement("div");
+                        // posts.classList.add("posts");
+                        posts.style.width = `${12 * item.posts }px`
 
-                    return `<li>
-                        ${totalposts.outerHTML}
-                        <span class="name">${item.name}</span>
-                        <span class="name">${item.title}</span>
-                    </li>`;
-                })
+                        const totalposts = document.createElement("div");
+                        totalposts.classList.add("posts");
+                        totalposts.style.width = `${12 * 30 }px`
+                        totalposts.appendChild(posts)
 
-                const ironmans = document.querySelector('#ironmans');
-                ironmans.innerHTML = htmlelements.join("");
+                        return `<li>
+                            ${totalposts.outerHTML}
+                            <span class="name">${item.name}</span>
+                            <span class="name">${item.title}</span>
+                        </li>`;
+                    })
 
-                const diffms = new Date() - new Date("2017-12-20");
-                const time = new Date(diffms)
-                const diffTime = time.getDay();
-                const currDay = document.querySelector(".currDay");
-                currDay.style.left = "5px"
-                currDay.style.left = `${48 + 12 + diffTime}px`;
-            });
+                    const ironmans = document.querySelector('#ironmans');
+                    ironmans.innerHTML = htmlelements.join("");
+
+                    const diffms = new Date() - new Date("2017-12-20");
+                    const time = new Date(diffms)
+                    const diffTime = time.getDay();
+                    const currDay = document.querySelector(".currDay");
+                    currDay.style.left = "5px"
+                    currDay.style.left = `${48 + 12 + diffTime}px`;
+               }
+            };
+
+            xhttp.open("GET", "http://ironmans.goodideas-studio.com/", true);
+            xhttp.send();
         </script>
     </body>
 </html>
