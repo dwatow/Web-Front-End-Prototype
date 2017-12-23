@@ -21,17 +21,17 @@
                 margin: auto;
                 height: 12px;
                 z-index: -1;
-                border-radius: 10px;
             }
 
             .posts>div {
                 background-color: #c1d7ff;
-                border-radius: 10px 0px 0px 10px;
             }
 
             .posts {
                 box-shadow: 0 0 0 1px #fff, 0 0 0 2px #ebebeb;
                 left: -4px;
+                border-radius: 10px;
+                overflow: hidden;
             }
 
             .currDay {
@@ -47,14 +47,22 @@
                 transition: .5s
             }
 
-            .count {
-                color: red;
-                vertical-align: sub;
-                font-size: .5em;
-            }
-
             .danger {
                 background-color: #ffc1c1!important;
+            }
+
+            .percentDay {
+                font-size: .7rem;
+            }
+
+            .title, .name {
+                font-size: .6rem;
+                vertical-align: 2px;
+            }
+
+            .count {
+                color: red;
+                font-size: 0.6rem;
             }
         </style>
     </head>
