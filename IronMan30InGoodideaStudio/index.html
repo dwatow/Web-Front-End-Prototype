@@ -21,14 +21,17 @@
                 margin: auto;
                 height: 12px;
                 z-index: -1;
+                border-radius: 10px;
             }
 
             .posts>div {
-                background-color: #dedede;
+                background-color: #c1d7ff;
+                border-radius: 10px 0px 0px 10px;
             }
 
             .posts {
                 box-shadow: 0 0 0 1px #fff, 0 0 0 2px #ebebeb;
+                left: -4px;
             }
 
             .currDay {
@@ -60,32 +63,39 @@
         <div class="currDay"></div>
         <ol id="ironmans">Loading...</ol>
         <script type="text/javascript">
-        setInterval(update, 20000);
+        let update1 = setInterval(updateEveryone, 30000);
+        let update2 = setInterval(updateClock, 1000);
 
-        // update();
+        function pause() {
+            clearInterval(update1);
+            clearInterval(update2);
+        }
+
+        function dateToYYYYMMDD(date) {
+            return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+        }
+
+        function diffDate(start, today) {
+            const diffms = today - start;
+            return new Date(diffms);
+        }
+
         let begin = new Date();
         let end;
-        function update() {
+        function updateEveryone() {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     const ironmans = document.querySelector('#ironmans');
-                    const currDay = document.querySelector(".currDay");
-                    const percentDay = document.querySelector('.percentDay');
-
-
                     const json = JSON.parse(this.responseText);
-                    // console.log(json);
-
-                    const diffDayCounter = getDayCount()
-                    currDay.style.left = `${48 + 12 * diffDayCounter}px`;
-
-                    percentDay.textContent = `第${diffDayCounter+1}天`
-
 
                     const htmlelements = json.map(function (item) {
+                        let isDanger = true;
+                        let today = new Date();
+                        let todayYYYYMMDD = dateToYYYYMMDD(today);
                         const postsCounter = Object.keys(item.postList.reduce (function (object, post) {
                             object[post.date] = true;
+                            if (post.date === todayYYYYMMDD) isDanger = false;
                             return object;
                         }, {})).length;
 
@@ -93,7 +103,8 @@
                             name: item.name,
                             title: item.title,
                             postsCount: postsCounter,
-                            postaPercent: (postsCounter/30*100).toFixed(2)
+                            postaPercent: (postsCounter/30*100).toFixed(2),
+                            isDanger: isDanger
                         };
                     })
                     .sort (function (a, b) {
@@ -101,8 +112,7 @@
                     })
                     .map (function (item) {
                         const posts = document.createElement("div");
-                        // console.log(item.postsCount, diffDayCounter);
-                        if (item.postsCount <= diffDayCounter) posts.classList.add("danger");
+                        if (item.isDanger) posts.classList.add("danger");
                         posts.style.width = `${12 * item.postsCount }px`
 
                         const totalposts = document.createElement("div");
@@ -118,9 +128,10 @@
                     })
 
                     ironmans.innerHTML = htmlelements.join("");
-                    end = new Date();
-                    var diff = new Date(end - begin)
-                    console.log('查詢花費 ', diff.getSeconds(), ' sec');
+                    console.log('查詢花費 ', diffDate(begin, new Date()).getSeconds(), ' sec');
+                }
+                else {
+                    console.log(`response 出錯了!!, State: ${this.readyState}, status: ${this.status}`);
                 }
             };
 
@@ -129,10 +140,14 @@
             console.log("Loading...");
         }
 
-        function getDayCount() {
-            const diffms = new Date() - new Date("2017-12-20");
-            const diffDate = new Date(diffms)
-            return diffDate.getDate() -1;
+        function updateClock() {
+            const currDay = document.querySelector(".currDay");
+            const percentDay = document.querySelector('.percentDay');
+
+            const today = new Date();
+            const diffDayCounter = diffDate(new Date("2017-12-20"), today).getDate() -1
+            currDay.style.left = `${44 + 12 * diffDayCounter}px`;
+            percentDay.textContent = `第${diffDayCounter+1}天, ${today.toLocaleString()}`;
         }
         </script>
     </body>
