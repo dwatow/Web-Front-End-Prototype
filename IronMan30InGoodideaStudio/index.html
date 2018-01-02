@@ -165,7 +165,7 @@
             const percentDay = document.querySelector('.percentDay');
 
             const today = new Date();
-            const diffDayCounter = diffDate(new Date("2017", "12", "20"), today).getDate() -1
+            const diffDayCounter = diffDate(new Date(2017, 11, 20), today).getDate() -1
             currDay.style.left = `${44 + 12 * diffDayCounter}px`;
             percentDay.textContent = `第${diffDayCounter+1}天, ${today.toLocaleString()}`;
         }
