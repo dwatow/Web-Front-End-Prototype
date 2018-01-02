@@ -110,10 +110,12 @@
                     const htmlelements = json.map(function (item) {
                         let isDanger = true;
                         let today = new Date();
-                        let todayYYYYMMDD = dateToYYYYMMDD(today);
+                        // let todayYYYYMMDD = dateToYYYYMMDD(today);
                         const postsCounter = Object.keys(item.postList.reduce (function (object, post) {
                             object[post.date] = true;
-                            if (post.date === todayYYYYMMDD) isDanger = false;
+                            const postdate = new Date(post.date.split("-")[0], post.date.split("-")[1].valueOf() - 1, post.date.split("-")[2]);
+                            console.log(dateToYYYYMMDD(postdate), dateToYYYYMMDD(today));
+                            if (dateToYYYYMMDD(postdate) === dateToYYYYMMDD(today)) isDanger = false;
                             return object;
                         }, {})).length;
 
@@ -163,7 +165,7 @@
             const percentDay = document.querySelector('.percentDay');
 
             const today = new Date();
-            const diffDayCounter = diffDate(new Date("2017-12-20"), today).getDate() -1
+            const diffDayCounter = diffDate(new Date("2017", "12", "20"), today).getDate() -1
             currDay.style.left = `${44 + 12 * diffDayCounter}px`;
             percentDay.textContent = `第${diffDayCounter+1}天, ${today.toLocaleString()}`;
         }
