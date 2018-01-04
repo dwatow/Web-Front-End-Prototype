@@ -1,0 +1,15 @@
+.container {
+    font-size: 0;
+    width: 100vw;
+
+    .box {
+        display: inline-block;
+        height: 100px;
+        width: 100px;
+        border: 1px solid black;
+    }
+}
+
+.parallax__group {
+    border: 1px solid blue;
+}

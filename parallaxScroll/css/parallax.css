@@ -1,0 +1,278 @@
+/* line 6, ../sass/parallax.scss */
+.parallax {
+  perspective: 1px;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* line 13, ../sass/parallax.scss */
+.parallax__layer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* line 21, ../sass/parallax.scss */
+.parallax__layer--base {
+  transform: translateZ(0);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back1 {
+  transform: translateZ(-1px) scale(2);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back2 {
+  transform: translateZ(-2px) scale(3);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back3 {
+  transform: translateZ(-3px) scale(4);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back4 {
+  transform: translateZ(-4px) scale(5);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back5 {
+  transform: translateZ(-5px) scale(6);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back6 {
+  transform: translateZ(-6px) scale(7);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back7 {
+  transform: translateZ(-7px) scale(8);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back8 {
+  transform: translateZ(-8px) scale(9);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back9 {
+  transform: translateZ(-9px) scale(10);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back10 {
+  transform: translateZ(-10px) scale(11);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back11 {
+  transform: translateZ(-11px) scale(12);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back12 {
+  transform: translateZ(-12px) scale(13);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back13 {
+  transform: translateZ(-13px) scale(14);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back14 {
+  transform: translateZ(-14px) scale(15);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back15 {
+  transform: translateZ(-15px) scale(16);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back16 {
+  transform: translateZ(-16px) scale(17);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back17 {
+  transform: translateZ(-17px) scale(18);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back18 {
+  transform: translateZ(-18px) scale(19);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back19 {
+  transform: translateZ(-19px) scale(20);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back20 {
+  transform: translateZ(-20px) scale(21);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back21 {
+  transform: translateZ(-21px) scale(22);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back22 {
+  transform: translateZ(-22px) scale(23);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back23 {
+  transform: translateZ(-23px) scale(24);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back24 {
+  transform: translateZ(-24px) scale(25);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back25 {
+  transform: translateZ(-25px) scale(26);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back26 {
+  transform: translateZ(-26px) scale(27);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back27 {
+  transform: translateZ(-27px) scale(28);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back28 {
+  transform: translateZ(-28px) scale(29);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back29 {
+  transform: translateZ(-29px) scale(30);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back30 {
+  transform: translateZ(-30px) scale(31);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back31 {
+  transform: translateZ(-31px) scale(32);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back32 {
+  transform: translateZ(-32px) scale(33);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back33 {
+  transform: translateZ(-33px) scale(34);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back34 {
+  transform: translateZ(-34px) scale(35);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back35 {
+  transform: translateZ(-35px) scale(36);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back36 {
+  transform: translateZ(-36px) scale(37);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back37 {
+  transform: translateZ(-37px) scale(38);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back38 {
+  transform: translateZ(-38px) scale(39);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back39 {
+  transform: translateZ(-39px) scale(40);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back40 {
+  transform: translateZ(-40px) scale(41);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back41 {
+  transform: translateZ(-41px) scale(42);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back42 {
+  transform: translateZ(-42px) scale(43);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back43 {
+  transform: translateZ(-43px) scale(44);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back44 {
+  transform: translateZ(-44px) scale(45);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back45 {
+  transform: translateZ(-45px) scale(46);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back46 {
+  transform: translateZ(-46px) scale(47);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back47 {
+  transform: translateZ(-47px) scale(48);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back48 {
+  transform: translateZ(-48px) scale(49);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back49 {
+  transform: translateZ(-49px) scale(50);
+}
+
+/* line 25, ../sass/parallax.scss */
+.parallax__layer--back50 {
+  transform: translateZ(-50px) scale(51);
+}
+
+/* line 30, ../sass/parallax.scss */
+.parallax__group {
+  position: relative;
+  height: 100vh;
+  transform-style: preserve-3d;
+}
