@@ -4,6 +4,7 @@
 - [初次視差滾動Parallax](https://dwatow.github.io/Web-Front-End-Prototype/parallax/)
 - [ScrollTop + Parallax](https://dwatow.github.io/Web-Front-End-Prototype/parallaxVerticalScroll/)
 - [water flow + bootstrap](https://dwatow.github.io/Web-Front-End-Prototype/waterFlow/)
+- [sassParallax](https://dwatow.github.io/Web-Front-End-Prototype/sassParallax/)
 - 滑動頁面
 	- [手刻版](https://dwatow.github.io/Web-Front-End-Prototype/sliderPage/byHand.html)
 	- [用Animate.css](https://dwatow.github.io/Web-Front-End-Prototype/sliderPage/animateCss.html)

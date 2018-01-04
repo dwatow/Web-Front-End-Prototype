@@ -10,8 +10,3 @@
   width: 100px;
   border: 1px solid black;
 }
-
-/* line 13, ../sass/test.scss */
-.parallax__group {
-  border: 1px solid blue;
-}
