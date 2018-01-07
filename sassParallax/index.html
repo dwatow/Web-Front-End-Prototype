@@ -18,8 +18,8 @@
         for (let i = 0; i < 10; ++i) {
             let boxes = "";
 
-            for (let i = 0; i < 100; ++i) {
-                boxes += `<div class="box parallax__layer--back${parseInt(Math.random() * 10 % 50 + 1)}"></div>`;
+            for (let i = 0; i < 50; ++i) {
+                boxes += `<div class="box parallax__layer--back${parseInt(Math.random() * 20 % 15 + 1)}">這是測試文字</div>`;
             }
             groups += `<div class="parallax__group">${boxes}</div>`
 

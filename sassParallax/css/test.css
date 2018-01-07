@@ -6,7 +6,8 @@
 /* line 5, ../sass/test.scss */
 .container .box {
   display: inline-block;
-  height: 100px;
-  width: 100px;
+  height: 350px;
+  width: 350px;
   border: 1px solid black;
+  border-radius: 50%;
 }
