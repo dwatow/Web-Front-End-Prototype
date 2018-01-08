@@ -66,7 +66,7 @@
                 font-size: .7rem;
             }
 
-            .title, .name {
+            .title, .name, .scribers {
                 font-size: .6rem;
                 vertical-align: 2px;
             }
@@ -138,8 +138,9 @@
                         const postsCounter = Object.keys(item.postList.reduce (function (object, post) {
                             object[post.date] = true;
                             const postdate = new Date(post.date.split("-")[0], post.date.split("-")[1].valueOf() - 1, post.date.split("-")[2]);
-                            console.log(dateToYYYYMMDD(postdate), dateToYYYYMMDD(today));
-                            if (dateToYYYYMMDD(postdate) === dateToYYYYMMDD(today)) isDanger = false;
+                            // console.log(dateToYYYYMMDD(postdate), dateToYYYYMMDD(today));
+                            // console.log("item.subscriber: ", item.subscriber);
+                            if (dateToYYYYMMDD(postdate) === dateToYYYYMMDD(today) || item.joinDays == 30) isDanger = false;
                             return object;
                         }, {})).length;
 
@@ -177,6 +178,7 @@
                         totalposts.appendChild(posts)
                         return `<li>
                         ${totalposts.outerHTML}
+                            <span class="scribers">訂閱人數: ${item.subscriber}</span>
                             <span class="name"><a href="${item.link}" target="_blank">${item.name}</a></span>
                             <label for="docs${index}" class="title">${item.title}</label>
                             <input type="radio" name="docs" id="docs${index}" /><div class="docs">${docsHtml}</div>
