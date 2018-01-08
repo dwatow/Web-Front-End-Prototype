@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: #888;
+    background-color: #fff;
+    font-size: 14px;
+    list-style: none;
+}
+
+.clearfix::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+body > * {
+    max-width: 935px;
+    margin: auto;
+}
+
+a {
+    text-decoration-line: none;
+}

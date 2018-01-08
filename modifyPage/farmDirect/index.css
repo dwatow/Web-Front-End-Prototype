@@ -1,0 +1,312 @@
+@import "base.css";
+@import "input.css";
+
+#header {
+    padding-top: 40px;
+    padding-bottom: 10px;
+    font-size: 0;
+}
+
+.menu, .logo, .cart_view {
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.logo, .menu {
+    font-size: 0;
+}
+
+.menu {
+    line-height: 54px;
+    float: right;
+}
+
+.menu .item {
+    display: inline-block;
+    font-size: 16px;
+    vertical-align: bottom;
+}
+
+.item + .item {
+    margin-left: 22px;
+}
+
+#nav {
+    position: relative;
+    padding: 10px 0;
+    padding-left: 3px;
+}
+
+#nav::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.breadcrumbs, .cart_view {
+    vertical-align: middle;
+    line-height: 33px;
+}
+
+.cart_view {
+    font-size: 15px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border: 1px solid #666;
+    float: right;
+}
+
+/* ---------------------------- */
+.product_buy {
+    font-size: 0;
+    padding-bottom: 15px;
+}
+
+.product_buy .flexslider {
+    margin-bottom: 0;
+}
+
+.product_imgs {
+    float: left;
+    width: 55%;
+}
+
+.product_introduction {
+    overflow: auto;
+}
+
+.product_introduction {
+    padding: 20px;
+}
+
+.product_introduction h1 {
+    font-size: 36px;
+    margin: .83em 0;
+    letter-spacing: 1px;
+    color: #555;
+    line-height: 28px;
+}
+
+.product_introduction p {
+    font-size: 14px;
+    line-height: 30px;
+    letter-spacing: 1px;
+    margin: .5rem 0;
+}
+
+.payment {
+    padding: 20px 0;
+}
+
+.payment .price {
+    font-size: 2.5rem;
+}
+
+.payment .quantity {
+    height: 36px;
+}
+
+.payment [type="button"] {
+    padding: 8px 16px;
+}
+
+.payment .quantity, .payment [type="button"] {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.payment .share {
+    padding-top: 20px;
+}
+
+.payment .share li {
+    line-height: 3rem;
+}
+
+.payment .share li img {
+    vertical-align: middle;
+    margin-right: 36px;
+}
+
+/* ------------------------ */
+
+.product_description h2, .product_description .navbar {
+    font-size: 18px;
+    line-height: 62px;
+}
+
+.product_description .navbar {
+    border-top: 1px solid #827e7e;
+    border-bottom: 1px solid #827e7e;
+    line-height: 48px;
+    font-size: 13px;
+}
+
+.product_description .navbar label {
+    margin-left: 54px;
+}
+
+.product_description .descript_detail {
+    position: relative;
+    height: 200px;
+}
+
+.product_description .note, .product_description .farmer {
+    color: rgb(118, 146, 60);
+}
+
+.product_description input {
+    position: absolute;
+    opacity: 0;
+}
+
+.product_description section {
+    opacity: 0;
+    transition: opacity .3s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 15px 0 30px;
+}
+
+#descript:checked ~ .descript_detail .descript {
+    opacity: 1;
+}
+
+#location:checked ~ .descript_detail .location {
+    opacity: 1;
+}
+
+#descript:checked ~ .navbar label[for="descript"] {
+    color: #779c2e;
+}
+
+#location:checked ~ .navbar label[for="location"] {
+    color: #779c2e;
+}
+
+.good_materials .title, .cookbooks>.title {
+    font-size: 18px;
+    color: #585959;
+    border-top: 1px solid #827e7e;
+    border-bottom: 1px solid #827e7e;
+    line-height: 52px;
+}
+
+
+.good_materials .flexslider:hover .flex-direction-nav a {
+    background-color: transparent;
+}
+.good_materials .flexslider:hover .flex-direction-nav a::after,
+.good_materials .flexslider:hover .flex-direction-nav a::before  {
+    color: #fff;
+}
+
+.good_materials .flexslider .slides li .con {
+    padding-top: 5px;
+}
+.good_materials .flexslider .slides li .price {
+    font-size: 24px;
+}
+
+.cookbooks .flexslider:hover .flex-direction-nav a {
+    background-color: transparent;
+}
+.cookbooks .flexslider:hover .flex-direction-nav a::after,
+.cookbooks .flexslider:hover .flex-direction-nav a::before  {
+    color: #fff;
+}
+/* ----------------------- */
+/* footer */
+/* ----------------------- */
+.about {
+    font-size: 0;
+    border-top: 1px solid #c0bebe;
+    border-bottom: 1px solid #c0bebe;
+    margin-bottom: 26px;
+}
+
+.about .title {
+    font-size: 16px;
+    line-height: 50px;
+    letter-spacing: 1px;
+}
+
+.about .download_app,
+.about .payment_readme,
+.about .about_market,
+.about .contacts {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.about .download_app,
+.about .contacts,
+.about .payment_readme {
+    width: 33.33%;
+}
+
+.about .about_market {
+    width: 100%;
+}
+
+.about .download_app .qrcode {
+    display: inline-block;
+    width: 40%;
+}
+
+.about .download_app .qrcode img {
+    width: 100%;
+}
+
+.about .download_app .qrcode div {
+    text-align: center;
+}
+
+.about a, .about p {
+    display: block;
+    margin: 10px 0;
+    font-size: 12px;
+}
+
+.about .about_market,
+.about .contacts {
+    font-size: 0;
+}
+
+.about .about_market .links {
+    display: inline-block;
+    width: 33.333%;
+}
+
+.moreinfo {
+    font-size: 0;
+    margin-bottom: 26px;
+}
+
+.moreinfo .fo_logo img {
+    width: 30%;
+}
+
+.moreinfo .fo_logo img + div {
+    display: inline-block;
+    width: 45%;
+}
+
+.moreinfo p {
+    font-size: 12px;
+}
+
+.moreinfo .fo_logo,
+.moreinfo .footer_time {
+    display: inline-block;
+    width: 20%;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.moreinfo>div:nth-child(2) {
+    width: 60%;
+    padding-right: 30px;
+}

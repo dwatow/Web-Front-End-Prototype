@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="./flexslider/flexslider.css" type="text/css">
+        <link rel="stylesheet" href="./index.css">
+        <style media="screen">
+            .top,
+            .copyright {
+                text-align: center;
+                max-width: 100%;
+                font-size: 13px;
+                background-color: #c6c2c2;
+            }
+
+            .copyright {
+                text-align: center;
+            }
+
+            .debugimg {
+                position: absolute;
+                top: 14px;
+                left: 367px;
+                opacity: .5;
+                outline: 1px dashed red;
+            }
+
+        </style>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <!-- <img class="debugimg" src="./testImg/header.png" alt=""> -->
+        <div class="top">厚生市集 ©2017 網站地圖</div>
+        <header id="header" class="clearfix">
+            <img class="logo" src="./resource/5965d61822d21.png"></img>
+            <div class="menu">
+                <div class="item">首頁</div>
+                <div class="item">關於厚生市集</div>
+                <div class="item">購買生鮮食材</div>
+                <div class="item">做菜食譜料理</div>
+                <div class="item">宅配預購專區</div>
+                <div class="item">農友產地溯源</div>
+                <div class="item">PGS共同購買</div>
+                <div class="item"><i class="fa fa-search"></i></div>
+            </div>
+        </header>
+        <nav id="nav" class="clearfix">
+            <div class="cart_view">購物車0樣 NT$ 0</div>
+            <span class="breadcrumbs">首頁 >> 購買生鮮食材 >蔬菜菇類根莖 > 黑柿蕃茄</span>
+        </nav>
+        <section class="product">
+            <div class="product_buy clearfix">
+                <div class="product_imgs flexslider">
+                    <!-- Place somewhere in the <body> of your page -->
+                    <ul class="slides">
+                        <li data-thumb="./resource/item_V4031-0.jpg">
+                            <img src="./resource/item_V4031-0.jpg" />
+                        </li>
+                        <li data-thumb="./resource/item_V4031-0.jpg">
+                            <img src="./resource/item_V4031-0.jpg" />
+                        </li>
+                        <li data-thumb="./resource/item_V4031-0.jpg">
+                            <img src="./resource/item_V4031-0.jpg" />
+                        </li>
+                        <li data-thumb="./resource/item_V4031-0.jpg">
+                            <img src="./resource/item_V4031-0.jpg" />
+                        </li>
+                    </ul>
+                </div>
+                <div class="product_introduction">
+                    <h1 class="product_name">黑柿番茄</h1>
+                    <p>容量包裝：600克±10%/包</p>
+                    <p>安全等級：有機認證</p>
+                    <p>生產者：葉大哥</p>
+                    <div class="payment">
+                        <p class="price">$108</p>
+                        <div class="quantity">
+                            <input type="number" min="1" step="1" value="1">
+                        </div>
+                        <button type="button" name="">加入購物車</button>
+                        <ul class="share">
+                            <li><img src="./resource/ic1.png" alt="">我的最愛</li>
+                            <li><img src="./resource/ic2.png" alt="">寄給朋友</li>
+                            <li><img src="./resource/ic3.png" alt="">分享</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="product_description">
+                <h2>商品資訊</h2>
+                <input type="radio" id="descript" name="product_description" checked>
+                <input type="radio" id="location" name="product_description">
+                <div class="navbar">
+                    <label for="descript">商品描述</label>
+                    <label for="location">農友產地</label>
+                </div>
+                <div class="descript_detail">
+                    <section class="descript">
+                        黑柿番茄又稱甘仔蜜、黑柿仔。<br>果實大，外皮較薄，在沒有全熟前，會帶著沉沉的綠，有墨綠色的斑紋，而全熟後轉為紅色，是台灣最早的番茄品種。<br>綠色即可食用，有濃厚番茄味。<br>適合煮湯、炒蛋。<br>也可將黑柿蕃茄切片沾點薑末醬油來食用，更能凸顯番茄原始的好味道。<br><br>
+                        <div class="note">建議保存方式：冷藏</div>
+                    </section>
+                    <section class="location">
+                        <p><span class="farmer">葉大哥</span></p>
+                        <p><strong>產地:</strong>&nbsp;</p>
+                        <p class="p1"><span class="s1">苗栗縣造橋鄉</span></p>
+                        <p class="p1"><span class="s1"><br></span></p><br><br>
+                        <p></p>
+                    </section>
+                </div>
+            </div>
+        </section>
+        <section class="good_materials">
+            <div class="title">熱門好食材</div>
+            <div class="materials flexslider">
+                <ul class="slides">
+                    <li>
+                        <img src="./resource/item_F0400-0.jpg">
+                        <div class="con">
+                            <a href="##">玉女小番茄</a>
+                        </div>
+                        <span class="price">
+                            $188
+                            <i class="fa fa-cart-plus"></i>
+                        </span>
+                    </li>
+                    <li>
+                        <img src="./resource/5a2dff57a5c26.jpg">
+                        <div class="con">
+                            <a href="##">茂谷柑</a>
+                        </div>
+                        <span class="price">
+                            $78
+                            <i class="fa fa-cart-plus"></i>
+                        </span>
+                    </li>
+                    <li>
+                        <img src="./resource/item_V1062-0.jpg">
+                        <div class="con">
+                            <a href="##">蘿蔓萵苣</a>
+                        </div>
+                        <span class="price">
+                            $40
+                            <i class="fa fa-cart-plus"></i>
+                        </span>
+                    </li>
+                    <li>
+                        <img src="./resource/item_V2010-0.jpg">
+                        <div class="con">
+                            <a href="##">小白菜</a>
+                        </div>
+                        <span class="price">
+                            $40
+                            <i class="fa fa-cart-plus"></i>
+                        </span>
+                    </li>
+                    <li>
+                        <img src="./resource/5a1e771fc4538.jpg">
+                        <div class="con">
+                            <a href="##">黃金包心白菜</a>
+                        </div>
+                        <span class="price">
+                            $108
+                            <i class="fa fa-cart-plus"></i>
+                        </span>
+                    </li>
+                    <li>
+                        <img src="./resource/item_V8060-0.jpg">
+                        <div class="con">
+                            <a href="##">銀耳</a>
+                        </div>
+                        <span class="price">
+                            $128
+                            <i class="fa fa-cart-plus"></i>
+                        </span>
+                    </li>
+                    <li>
+                        <img src="./resource/5a12ab4779a29.jpg">
+                        <div class="con">
+                            <a href="##">肚臍柑</a>
+                        </div>
+                        <span class="price">
+                            $48
+                            <i class="fa fa-cart-plus"></i>
+                        </span>
+                    </li>
+                    <li>
+                        <img src="./resource/5a1b87978d42b.jpg">
+                        <div class="con">
+                            <a href="##" class="infr">(盤克夏)日式里肌豬排-第2包7折</a>
+                        </div>
+                        <span class="price">
+                            $336
+                            <i class="fa fa-cart-plus"></i>
+                        </span>
+                    </li>
+                    <li>
+                        <img src="./resource/5a2f63d0006bf.jpg">
+                        <div class="con">
+                            <a href="##" class="infr">(標裕牧場)珍珠土雞蛋</a>
+                        </div>
+                        <span class="price">
+                            $90
+                            <i class="fa fa-cart-plus"></i>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="cookbooks">
+            <div class="outter shipu_dp">
+                <div class="title">食譜搭配</div>
+                <div class="cookbookslider flexslider">
+                    <ul class="slides">
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0031.jpg">
+                                </div>
+                                <div class="title">檸檬茄汁魚</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0036.jpg">
+                                </div>
+                                <div class="title">茄香炸魚塊</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0044.jpg">
+                                </div>
+                                <div class="title">番茄炒肉片</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0055.jpg">
+                                </div>
+                                <div class="title">番茄炒雞絲</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0059.jpg">
+                                </div>
+                                <div class="title">番茄炒馬鈴薯</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0066.jpg">
+                                </div>
+                                <div class="title">洋蔥番茄湯</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0069.jpg">
+                                </div>
+                                <div class="title">番茄燴茄子</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0080.jpg">
+                                </div>
+                                <div class="title">番茄炒白花椰</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0134.jpg">
+                                </div>
+                                <div class="title">番茄肉醬義大利麵</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0175.jpg">
+                                </div>
+                                <div class="title">活力鮮蔬可頌</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0199.jpg">
+                                </div>
+                                <div class="title">鳳梨蕃茄汁</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0210.jpg">
+                                </div>
+                                <div class="title">蕃茄鱸魚湯 </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0212.jpg">
+                                </div>
+                                <div class="title">涼拌秋葵番茄丁</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0213.jpg">
+                                </div>
+                                <div class="title">水果蜂蜜冰磚</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0221.jpg">
+                                </div>
+                                <div class="title">鮮蔬蛋滿福堡</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0254.jpg">
+                                </div>
+                                <div class="title">黑木耳蕃茄燉肉 </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0261.jpg">
+                                </div>
+                                <div class="title">雞絲拌青木瓜</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0271.jpg">
+                                </div>
+                                <div class="title">番茄蛋炒豆包</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0273.jpg">
+                                </div>
+                                <div class="title">蕃茄優格汁</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0294.jpg">
+                                </div>
+                                <div class="title">四季莎莎小點</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0313.jpg">
+                                </div>
+                                <div class="title">隨意煮麻辣湯麵</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0320.jpg">
+                                </div>
+                                <div class="title">蕃茄南瓜蜜奶</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0363.jpg">
+                                </div>
+                                <div class="title">櫛瓜排骨鮮蔬湯</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0395.jpg">
+                                </div>
+                                <div class="title">鮮蔬醬拌透抽</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0514.jpg">
+                                </div>
+                                <div class="title">酸辣烤魚</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/recipe_0573.jpg">
+                                </div>
+                                <div class="title">紅酒燉牛尾</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="##">
+                                <div class="pic">
+                                    <img src="./resource/5a01939dde6dd.jpg">
+                                </div>
+                                <div class="title">紹子烘蛋</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </section>
+        <section class="ingredients"></section>
+        <footer id="footer">
+            <section class="about">
+                <div class="download_app">
+                    <div class="title">
+                        下載厚生市集APP
+                    </div>
+                    <div class="qrcode">
+                        <img src="./resource/v1.png">
+                        <div>iOS</div>
+                    </div>
+                    <div class="qrcode">
+                        <img src="./resource/v2.png">
+                        <div>Android</div>
+                    </div>
+                </div>
+                <div class="contacts">
+                    <div class="title">聯絡厚生市集</div>
+                    <div class="contact">
+                        <p>客服電話 03-3971750 分機 66 </p>
+                        <p>週一至週五 09:30-18:30</p>
+                        <p>客服信箱</p>
+                        <p>service@mail.farm-direct.com.tw</p>
+                    </div>
+                </div>
+                <div class="payment_readme">
+                    <div class="title">購買說明</div>
+                    <a href="https://www.farm-direct.com.tw/Home/Article/article_info.html?id=106">如何購買</a>
+                    <a href="https://www.farm-direct.com.tw/Home/Article/article_info.html?id=112">付款及配送</a>
+                    <a href="https://www.farm-direct.com.tw/Home/Article/article_info.html?id=144">回收包材紙箱</a>
+                    <a href="https://www.farm-direct.com.tw/Home/Article/article_info.html?id=113">訂單及發票查詢</a>
+                </div>
+                <div class="about_market">
+                    <div class="title">關於厚生市集</div>
+                    <div class="links">
+                        <a href="https://www.farm-direct.com.tw/index.php/Home/Article/detail.html?article_id=104">厚生介绍</a>
+                        <a href="https://www.farm-direct.com.tw/index.php/Home/Article/articleList.html?article_id=125">里程歷史</a>
+                        <a href="https://www.farm-direct.com.tw/index.php/Home/Article/articleList.html?article_id=105">媒體報導</a>
+                        <a href="https://www.farm-direct.com.tw/index.php/Home/Index/sitemap.html">網站導覽</a>
+                    </div>
+                    <div class="links">
+                        <a href="https://www.farm-direct.com.tw/index.php/Home/Article/articleList.html?article_id=122">門市資訊</a>
+                        <a href="https://www.farm-direct.com.tw/index.php/Home/Article/article_info.html?id=123">會員VIP資格</a>
+                        <a href="https://www.farm-direct.com.tw/index.php/Home/Article/article_info.html?id=124">會員服務條款</a>
+                        <a href="https://www.farm-direct.com.tw/index.php/Home/Article/article_info.html?id=128">成爲厚生農友</a>
+                    </div>
+                    <div class="links">
+                        <a href="##" id="ding">訂閱電子報</a>
+                        <a href="https://www.farm-direct.com.tw/index.php/Home/Article/articleList/article_id/132" target="_blank">部落格</a>
+                        <a href="https://www.youtube.com/channel/UCFqMeOAfDL67R_2dBQyIc2w" target="_blank">Youtube</a>
+                        <a href="https://zh-tw.facebook.com/FarmDirect.tw/" target="_blank">FB官方粉絲團</a>
+                    </div>
+                </div>
+            </section>
+            <section class="moreinfo">
+                <div class="fo_logo">
+                    <img src="./resource/f_logo.jpg">
+                    <div>
+                        <p>國內首家電子</p>
+                        <p>商務通過認證</p>
+                    </div>
+                </div>
+                <div class="footer_time">
+                    <div class="title">生鮮食材配送</div>
+                    <p>499小份量自由選購，早上訂下午到 下午訂晚上到，周一至周五配送</p>
+                    <p>配送區：台北市全區、新北市(三重區、中和區、五股區、土城區、新店區、新莊區、板橋區、林口區、樹林區、永和區、汐止區、泰山區、蘆洲區)、桃園市(桃園區、蘆竹區、龜山區)</p>
+                </div>
+                <div class="footer_time">
+                    <div class="title">宅配預購專區</div>
+                    <p>399安全蔬菜箱</p>
+                    <p>季節水果禮盒</p>
+                    <p>厚生嚴選好物</p>
+                </div>
+            </section>
+        </footer>
+        <section class="copyright">厚生市集 ©2017 網站地圖</section>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+        <script src="./flexslider/jquery.flexslider.js"></script>
+        <script type="text/javascript">
+        // Can also be used with $(document).ready()
+        $(window).load(function() {
+          $('.product_imgs').flexslider({
+            animation: "slide",
+            controlNav: "thumbnails",
+            directionNav: false
+          });
+
+          $('.materials').flexslider({
+            animation: "slide",
+            animationLoop: false,
+            itemWidth: 210,
+            itemMargin: 5,
+            minItems: 2,
+            maxItems: 4,
+            controlNav: false,
+            slideshow: false
+          });
+
+          $('.cookbookslider').flexslider({
+            animation: "slide",
+            animationLoop: false,
+            itemWidth: 120,
+            itemMargin: 5,
+            minItems: 4,
+            maxItems: 8,
+            controlNav: false,
+            slideshow: true
+          });
+
+        });
+
+        </script>
+
+        <script type="text/javascript">
+            jQuery('<div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>').insertAfter('.quantity input');
+            jQuery('.quantity').each(function() {
+            var spinner = jQuery(this),
+            input = spinner.find('input[type="number"]'),
+            btnUp = spinner.find('.quantity-up'),
+            btnDown = spinner.find('.quantity-down'),
+            min = input.attr('min'),
+            max = input.attr('max');
+
+            btnUp.click(function() {
+            var oldValue = parseFloat(input.val());
+            if (oldValue >= max) {
+              var newVal = oldValue;
+            } else {
+              var newVal = oldValue + 1;
+            }
+            spinner.find("input").val(newVal);
+            spinner.find("input").trigger("change");
+            });
+
+            btnDown.click(function() {
+            var oldValue = parseFloat(input.val());
+            if (oldValue <= min) {
+              var newVal = oldValue;
+            } else {
+              var newVal = oldValue - 1;
+            }
+            spinner.find("input").val(newVal);
+            spinner.find("input").trigger("change");
+            });
+
+            });
+
+        </script>
+    </body>
+</html>
