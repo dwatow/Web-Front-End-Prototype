@@ -78,10 +78,13 @@
             }
 
             .docs {
-                position: absolute;
+                position: fixed;
+                top: 10vh;
                 left: 50vw;
                 opacity: 0;
                 transition: opacity .3s;
+                height: 85vh;
+                overflow: auto;
             }
 
             [type="radio"] {
@@ -106,10 +109,14 @@
         <div class="currDay"></div>
         <ol id="ironmans">Loading...</ol>
         <script type="text/javascript">
-        let update1 = setInterval(updateEveryone, 30000);
-        let update2 = setInterval(updateClock, 1000);
 
-        function pause() {
+        let update1, update2;
+        (function start () {
+            update1 = setInterval(updateEveryone, 30000);
+            update2 = setInterval(updateClock, 1000);
+        })()
+
+        function pause () {
             clearInterval(update1);
             clearInterval(update2);
         }
@@ -221,7 +228,13 @@
             setTimeout (function () {
                 document.querySelector('body').classList.remove('pyro');
             }, 10000);
+            pause();
         }
+
+        const percentDay = document.querySelector('.percentDay');
+        percentDay.addEventListener('click', function () {
+            start();
+        })
         </script>
     </body>
 </html>

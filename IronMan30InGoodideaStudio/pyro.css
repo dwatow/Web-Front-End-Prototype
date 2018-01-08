@@ -1,4 +1,6 @@
 
+/*reference: https://codepen.io/yshlin/pen/ylDEk */
+
 .pyro::before, .pyro::after {
   content: '';
   position: absolute;
