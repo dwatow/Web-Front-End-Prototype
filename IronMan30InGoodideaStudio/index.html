@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Iron Mans 30 Day in Goodidea Studio</title>
+        <link rel="stylesheet" href="./pyro.css">
         <style media="screen">
 
             :root {
@@ -133,14 +134,14 @@
 
                     const htmlelements = json.map(function (item) {
                         let isDanger = true;
+                        let isFinish = "";
                         let today = new Date();
                         // let todayYYYYMMDD = dateToYYYYMMDD(today);
                         const postsCounter = Object.keys(item.postList.reduce (function (object, post) {
                             object[post.date] = true;
                             const postdate = new Date(post.date.split("-")[0], post.date.split("-")[1].valueOf() - 1, post.date.split("-")[2]);
-                            // console.log(dateToYYYYMMDD(postdate), dateToYYYYMMDD(today));
-                            // console.log("item.subscriber: ", item.subscriber);
                             if (dateToYYYYMMDD(postdate) === dateToYYYYMMDD(today) || item.joinDays == 30) isDanger = false;
+                            if (item.joinDays == 30) isFinish = "finished";
                             return object;
                         }, {})).length;
 
@@ -151,6 +152,7 @@
                             postsCount: postsCounter,
                             postaPercent: (postsCounter/30*100).toFixed(2),
                             isDanger: isDanger,
+                            isFinish: isFinish,
                             docs: item.postList,
                             subscriber: item.subscriber
                         };
@@ -180,7 +182,7 @@
                         ${totalposts.outerHTML}
                             <span class="scribers">訂閱人數: ${item.subscriber}</span>
                             <span class="name"><a href="${item.link}" target="_blank">${item.name}</a></span>
-                            <label for="docs${index}" class="title">${item.title}</label>
+                            <label for="docs${index}" class="title ${item.isFinish}">${item.title}</label>
                             <input type="radio" name="docs" id="docs${index}" /><div class="docs">${docsHtml}</div>
                             <span class="count">${item.postsCount}篇, ${item.postaPercent}%</span>
                         </li>`;
@@ -188,6 +190,11 @@
 
                     ironmans.innerHTML = htmlelements.join("");
                     console.log('查詢花費 ', diffDate(begin, new Date()).getSeconds(), ' sec');
+
+                    const finisheds = document.querySelectorAll('.finished');
+                    finisheds.forEach(function (finished) {
+                        finished.addEventListener('click', pyrotechnics);
+                    })
                 }
                 else {
                     console.log(`response 出錯了!!, State: ${this.readyState}, status: ${this}`);
@@ -207,6 +214,13 @@
             const diffDayCounter = diffDate(new Date(2017, 11, 20), today).getDate()-1;
             currDay.style.left = `${44 + 12 * diffDayCounter}px`;
             percentDay.textContent = `第${diffDayCounter+1}天, ${today.toLocaleString()}`;
+        }
+
+        function pyrotechnics () {
+            document.querySelector('body').classList.add('pyro');
+            setTimeout (function () {
+                document.querySelector('body').classList.remove('pyro');
+            }, 10000);
         }
         </script>
     </body>
