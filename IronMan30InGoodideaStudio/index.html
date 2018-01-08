@@ -75,6 +75,29 @@
                 color: red;
                 font-size: 0.6rem;
             }
+
+            .docs {
+                position: absolute;
+                left: 50vw;
+                opacity: 0;
+                transition: opacity .3s;
+            }
+
+            [type="radio"] {
+                position: fixed;
+                left: 0;
+                opacity: 0;
+            }
+
+            label {
+                cursor: pointer;
+            }
+
+            input:checked + .docs {
+                opacity: 1;
+                z-index: 10;
+            }
+
         </style>
     </head>
     <body>
@@ -123,15 +146,27 @@
                         return {
                             name: item.name,
                             title: item.title,
+                            link: item.link,
                             postsCount: postsCounter,
                             postaPercent: (postsCounter/30*100).toFixed(2),
-                            isDanger: isDanger
+                            isDanger: isDanger,
+                            docs: item.postList,
+                            subscriber: item.subscriber
                         };
                     })
                     .sort (function (a, b) {
                         return a.postsCount - b.postsCount;
                     })
-                    .map (function (item) {
+                    .map (function (item, index) {
+                        let docsHtml = '';
+                        item.docs.map(function (doc) {
+                            docsHtml += `<li><a href="${doc.url}" target="_blank">${doc.title}</a></li>`
+                        })
+
+                        docsHtml = `<ol>${docsHtml}</ol>`
+                        // console.log(docsHtml);
+
+
                         const posts = document.createElement("div");
                         if (item.isDanger) posts.classList.add("danger");
                         posts.style.width = `${12 * item.postsCount }px`
@@ -142,8 +177,9 @@
                         totalposts.appendChild(posts)
                         return `<li>
                         ${totalposts.outerHTML}
-                            <span class="name">${item.name}</span>
-                            <span class="title">${item.title}</span>
+                            <span class="name"><a href="${item.link}" target="_blank">${item.name}</a></span>
+                            <label for="docs${index}" class="title">${item.title}</label>
+                            <input type="radio" name="docs" id="docs${index}" /><div class="docs">${docsHtml}</div>
                             <span class="count">${item.postsCount}篇, ${item.postaPercent}%</span>
                         </li>`;
                     })
@@ -152,7 +188,7 @@
                     console.log('查詢花費 ', diffDate(begin, new Date()).getSeconds(), ' sec');
                 }
                 else {
-                    console.log(`response 出錯了!!, State: ${this.readyState}, status: ${this.status}`);
+                    console.log(`response 出錯了!!, State: ${this.readyState}, status: ${this}`);
                 }
             };
 
