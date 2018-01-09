@@ -140,7 +140,7 @@
                 transition: opacity .3s;
                 height: 85vh;
                 overflow: auto;
-                font-size: 14px;
+                font-size: 12px;
             }
 
             [type="radio"] {
@@ -183,19 +183,19 @@
         </style>
     </head>
     <body>
-        <a href="##">test link</a>
         <section>
             <div class="percentDay"></div>
             <div class="currDay"></div>
             <ol id="ironmans">Loading...</ol>
         </section>
-        <section>
+        <section id="postsLikeAndViews">
             <h2>文章排名 Like Top 20</h2>
             <ol id="likeDocs" class="like"></ol>
             <h2>文章排名 瀏覽數 Top 20</h2>
             <ol id="viewDocs" class="view"></ol>
         </section>
         <script type="text/javascript">
+        updateEveryone();
 
         let update1, update2;
         (function start () {
@@ -219,8 +219,8 @@
 
         let begin = new Date();
         let end;
+        var xhttp = new XMLHttpRequest();
         function updateEveryone() {
-            var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     const ironmans = document.querySelector('#ironmans');
@@ -333,9 +333,13 @@
                     console.log(`response 出錯了!!, State: ${this.readyState}, status: ${this}`);
                 }
 
-                likeDocs.addEventListener('mouseenter', function () {
+                postsLikeAndViews.addEventListener('mouseenter', function () {
                     const docs = document.querySelector('.docs');
-                    docs.style.display= "none";
+                    const radios = document.querySelectorAll('[type="radio"]')
+                    radios.forEach(function (item) {
+                        item.checked = false;
+                    })
+                    console.log('enter');
                 })
 
             };
