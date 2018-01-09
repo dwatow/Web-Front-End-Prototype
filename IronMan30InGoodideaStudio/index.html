@@ -6,10 +6,6 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Iron Mans 30 Day in Goodidea Studio</title>
         <link rel="stylesheet" href="./pyro.css">
-        <link rel="stylesheet"
-              href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css"
-              integrity="sha384-OHBBOqpYHNsIqQy8hL1U+8OXf9hH6QRxi0+EODezv82DfnZoV7qoHAZDwMwEJvSw"
-              crossorigin="anonymous">
         <style media="screen">
 
             :root {
@@ -36,8 +32,48 @@
                 width: 100vw;
             }
 
+            h2 {
+                text-align: center;
+            }
+
+            a, label {
+                animation: fadeIn 1s;
+            }
+
             a:hover, label:hover {
-                animation-name: rubberBand 1s;
+                animation: rubberBand .5s;
+            }
+
+            @keyframes rubberBand {
+                0% {
+                    transform: scaleX(1)
+                }
+
+                30% {
+                    transform: scale3d(1.25,.75,1)
+                    color: red;
+                }
+
+                40% {
+                    transform: scale3d(.75,1.25,1)
+                }
+
+                50% {
+                    transform: scale3d(1.15,.85,1)
+                }
+
+                65% {
+                    transform: scale3d(.95,1.05,1)
+                    color: red;
+                }
+
+                75% {
+                    transform: scale3d(1.05,.95,1)
+                }
+
+                to {
+                    transform: scaleX(1)
+                }
             }
 
             .posts>div,
@@ -133,6 +169,7 @@
 
             #likeDocs, #viewDocs {
                 list-style: none;
+                font-size: 14px;
             }
 
             .order {
@@ -155,10 +192,10 @@
             <ol id="ironmans">Loading...</ol>
         </section>
         <section>
+            <h2>文章排名 Like Top 20</h2>
             <ol id="likeDocs" class="like"></ol>
+            <h2>文章排名 瀏覽數 Top 20</h2>
             <ol id="viewDocs" class="view"></ol>
-        </section>
-        <section>
         </section>
         <script type="text/javascript">
 
@@ -190,6 +227,7 @@
                 if (this.readyState == 4 && this.status == 200) {
                     const ironmans = document.querySelector('#ironmans');
                     let postsHistogram = {
+                        author: "",
                         maxLike: 50,
                         maxView: 50,
                         allPosts: [],
@@ -200,11 +238,11 @@
                             .map((post) => {
                                 if (histogramType === "view") {
                                     var percent = parseInt(post[histogramType] / this.maxView * 100)
-                                    console.log(post[histogramType], "/", this.maxView, percent);
+                                    // console.log(post[histogramType], "/", this.maxView, percent);
                                 }
                                 else if (histogramType === "like") {
                                     var percent = parseInt(post[histogramType] / this.maxLike * 100)
-                                    console.log(post[histogramType], "/", this.maxView, percent);
+                                    // console.log(post[histogramType], "/", this.maxView, percent);
                                 }
                                 // console.log(post.view, "/", this.maxView, percent);
                                 const order = document.createElement("div");
@@ -212,7 +250,7 @@
                                 order.classList.add("order");
                                 return `<li>
                                     ${order.outerHTML}
-                                    ${histogramType}: ${post[histogramType]}, <a href="${post.url}" target="_blank">${post.title}</a> ${post.date}
+                                    ${histogramType}: ${post[histogramType]}, <a href="${post.url}" target="_blank">${post.title}</a> - ${post.author}, ${post.date}
                                 </li>`;
                             }).join("");
                         }
@@ -226,6 +264,7 @@
                         let today = new Date();
                         // let todayYYYYMMDD = dateToYYYYMMDD(today);
                         postsHistogram.allPosts = [...postsHistogram.allPosts, ...item.postList];
+                        postsHistogram.author = item.name;
                         const postsCounter = Object.keys(item.postList.reduce (function (object, post) {
                             object[post.date] = true;
                             const postdate = new Date(post.date.split("-")[0], post.date.split("-")[1].valueOf() - 1, post.date.split("-")[2]);
