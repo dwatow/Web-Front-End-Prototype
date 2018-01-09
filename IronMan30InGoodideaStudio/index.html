@@ -36,43 +36,40 @@
                 text-align: center;
             }
 
-            a, label {
-                animation: fadeIn 1s;
-            }
-
             a:hover, label:hover {
+                display: inline-block;
                 animation: rubberBand .5s;
             }
 
             @keyframes rubberBand {
                 0% {
-                    transform: scaleX(1)
+                    transform: scaleX(1);
                 }
 
                 30% {
-                    transform: scale3d(1.25,.75,1)
+                    transform: scale3d(1.25,.75,1);
                     color: red;
                 }
 
                 40% {
-                    transform: scale3d(.75,1.25,1)
+                    transform: scale3d(.75,1.25,1);
                 }
 
                 50% {
-                    transform: scale3d(1.15,.85,1)
+                    transform: scale3d(1.15,.85,1);
                 }
 
                 65% {
-                    transform: scale3d(.95,1.05,1)
+                    transform: scale3d(.95,1.05,1);
                     color: red;
                 }
 
                 75% {
-                    transform: scale3d(1.05,.95,1)
+                    transform: scale3d(1.05,.95,1);
                 }
 
                 to {
-                    transform: scaleX(1)
+                    transform: scaleX(1);
                 }
             }
 
@@ -186,6 +183,7 @@
         </style>
     </head>
     <body>
+        <a href="##">test link</a>
         <section>
             <div class="percentDay"></div>
             <div class="currDay"></div>
