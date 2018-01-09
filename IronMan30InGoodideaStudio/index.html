@@ -263,7 +263,11 @@
                         let isFinish = "";
                         let today = new Date();
                         // let todayYYYYMMDD = dateToYYYYMMDD(today);
-                        postsHistogram.allPosts = [...postsHistogram.allPosts, ...item.postList];
+                        postNameList = item.postList.map ((post) => {
+                            post.title += ` - ${item.name}`;
+                            return post;
+                        });
+                        postsHistogram.allPosts = [...postsHistogram.allPosts, ...postNameList];
                         postsHistogram.author = item.name;
                         const postsCounter = Object.keys(item.postList.reduce (function (object, post) {
                             object[post.date] = true;
