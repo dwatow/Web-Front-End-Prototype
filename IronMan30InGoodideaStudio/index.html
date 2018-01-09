@@ -212,7 +212,7 @@
                                 order.classList.add("order");
                                 return `<li>
                                     ${order.outerHTML}
-                                    ${histogramType}: ${post[histogramType]}, <a href="post.url" target="_blank">${post.title}</a> ${post.date}
+                                    ${histogramType}: ${post[histogramType]}, <a href="${post.url}" target="_blank">${post.title}</a> ${post.date}
                                 </li>`;
                             }).join("");
                         }
