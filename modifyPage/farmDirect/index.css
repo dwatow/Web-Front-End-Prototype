@@ -3,8 +3,11 @@
 
 #header {
     padding-top: 40px;
-    padding-bottom: 10px;
     font-size: 0;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid rgb(243, 243, 243);
 }
 
 .menu, .logo, .cart_view {
@@ -34,6 +37,7 @@
 #nav {
     position: relative;
     padding: 10px 0;
+    padding-top: 20px;
     padding-left: 3px;
 }
 
