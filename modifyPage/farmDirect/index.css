@@ -104,6 +104,21 @@
 
 .payment .quantity {
     height: 36px;
+    /* width: 180px; */
+}
+
+.payment .quantity input {
+    width: 130px;
+}
+
+.payment .quantity .quantity-button.quantity-down {
+    left: 0;
+    font-size: 30px;
+}
+
+.payment .quantity .quantity-button.quantity-up {
+    right: 0;
+    font-size: 30px;
 }
 
 .payment [type="button"] {

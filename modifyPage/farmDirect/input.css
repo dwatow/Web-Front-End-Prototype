@@ -41,7 +41,7 @@ input[type=number]
   position: relative;
   cursor: pointer;
   border: 1px solid #eee;
-  width: 20px;
+  width: 40px;
   text-align: center;
   color: #333;
   font-size: 13px;
@@ -58,13 +58,15 @@ input[type=number]
 
 .quantity-button.quantity-up {
   position: absolute;
-  height: 50%;
+  height: 100%;
   top: 0;
+  right: 40px;
   border: 1px solid #eee;
 }
 
 .quantity-button.quantity-down {
   position: absolute;
-  bottom: -2px;
-  height: 50%;
+  top: 0;
+  right: 0;
+  height: 100%;
 }
