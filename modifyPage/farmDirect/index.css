@@ -205,14 +205,13 @@
     color: #779c2e;
 }
 
-.good_materials .title, .cookbooks>.title {
+.good_materials .title, .cookbooks>div>.title {
     font-size: 18px;
     color: #585959;
     border-top: 1px solid #827e7e;
     border-bottom: 1px solid #827e7e;
     line-height: 52px;
 }
-
 
 .good_materials .flexslider:hover .flex-direction-nav a {
     background-color: transparent;
@@ -227,6 +226,30 @@
 }
 .good_materials .flexslider .slides li .price {
     font-size: 24px;
+}
+
+.good_materials .slides li:hover img,
+.good_materials .slides li:hover a {
+    transition: .3s;
+}
+
+.good_materials .slides li:hover img {
+    opacity: 0.6;
+}
+
+.good_materials .slides li:hover a {
+    color: #779c2e;
+}
+.good_materials .slides li:hover i {
+    color: red;
+}
+
+.cookbooks .slides li .title {
+    transition: .3s;
+}
+
+.cookbooks .slides li:hover .title {
+    color: #779c2e;
 }
 
 .cookbooks .flexslider:hover .flex-direction-nav a {
