@@ -291,7 +291,7 @@
                             subscriber: item.subscriber
                         };
                     })
-                    .sort ((a, b) => a.postsCount - b.postsCount)
+                    .sort ((a, b) => b.subscriber - a.subscriber)
                     .map (function (item, index) {
                         let docsHtml = '';
                         item.docs.map(function (doc) {
