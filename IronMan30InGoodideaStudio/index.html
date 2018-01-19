@@ -99,7 +99,7 @@
                 background-color: #fff;
             }
 
-            .currDay {
+            /* .currDay {
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -107,13 +107,13 @@
                 width: 1px;
                 background-color: #f00;
                 z-index: -5;
-            }
+            } */
 
-            .currDay {
+            /* .currDay {
                 -webkit-transition: .5s cubic-bezier(.73,-0.24,.53,1.7) ;
                 -o-transition: .5s cubic-bezier(.73,-0.24,.53,1.7) ;
                 transition: .5s cubic-bezier(.73,-0.24,.53,1.7) ;
-            }
+            } */
 
             .danger {
                 background-color: #ffc1c1!important;
@@ -186,7 +186,7 @@
     <body>
         <section>
             <div class="percentDay"></div>
-            <div class="currDay"></div>
+            <!-- <div class="currDay"></div> -->
             <ol id="ironmans">Loading...</ol>
         </section>
         <section id="postsLikeAndViews">
@@ -351,12 +351,12 @@
         }
 
         function updateClock() {
-            const currDay = document.querySelector(".currDay");
+            // const currDay = document.querySelector(".currDay");
             const percentDay = document.querySelector('.percentDay');
 
             const today = new Date();
             const diffDayCounter = diffDate(new Date(2017, 11, 20), today).getDate()-1;
-            currDay.style.left = `${44 + 12 * diffDayCounter - 8}px`;
+            // currDay.style.left = `${44 + 12 * diffDayCounter - 8}px`;
             percentDay.textContent = `第${diffDayCounter+1}天, ${today.toLocaleString()}`;
         }
 
