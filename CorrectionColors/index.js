@@ -11,6 +11,7 @@ const patterns = [
 ]
 
 let index = 0;
+location.hash = patterns[index];
 document.addEventListener('keyup', e => {
   const code = e.keyCode;
   switch (code) {
